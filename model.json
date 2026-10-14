@@ -1,0 +1,205 @@
+{
+  "source": "Salaya_Elevation_Terrain.skp",
+  "sourceSha256": "edc26517bdbbd5bd5522e16a7ad3cec9f996783559e4c80273b328a3854b1f44",
+  "nativeReader": "SketchUp 2025 C API",
+  "faces": 178183,
+  "vertices": 99378,
+  "nativeBoundsMetres": [
+    [
+      197.6877,
+      418.2493,
+      -4.0
+    ],
+    [
+      1552.9019,
+      2169.9869,
+      7.000000000000001
+    ]
+  ],
+  "webCenterLocalMetres": [
+    875.2948,
+    1294.1181,
+    0.0
+  ],
+  "utmOffset": [
+    642000,
+    1524000
+  ],
+  "crs": "WGS 84 / UTM zone 47N (source drawing note)",
+  "verticalDatum": "ระดับเดิมตามแบบสำรวจ (รทก.); BM BMA 6001/1 = 2.753 ม.",
+  "planAreaM2": 2056905.5192242556,
+  "nativeSurfaceAreaM2": 2074267.9701446332,
+  "palette": [
+    {
+      "lower": -4.0,
+      "upper": -3.5,
+      "hex": "#213e64",
+      "name": "ELEV_-4.00_to_-3.50_m",
+      "planAreaM2": 5874.9477911850045
+    },
+    {
+      "lower": -3.5,
+      "upper": -3.0,
+      "hex": "#234e74",
+      "name": "ELEV_-3.50_to_-3.00_m",
+      "planAreaM2": 3706.8025055299945
+    },
+    {
+      "lower": -3.0,
+      "upper": -2.5,
+      "hex": "#255f84",
+      "name": "ELEV_-3.00_to_-2.50_m",
+      "planAreaM2": 4638.228988055005
+    },
+    {
+      "lower": -2.5,
+      "upper": -2.0,
+      "hex": "#276e93",
+      "name": "ELEV_-2.50_to_-2.00_m",
+      "planAreaM2": 10070.94671645849
+    },
+    {
+      "lower": -2.0,
+      "upper": -1.5,
+      "hex": "#2f80a0",
+      "name": "ELEV_-2.00_to_-1.50_m",
+      "planAreaM2": 19947.92373633553
+    },
+    {
+      "lower": -1.5,
+      "upper": -1.0,
+      "hex": "#3d94a7",
+      "name": "ELEV_-1.50_to_-1.00_m",
+      "planAreaM2": 12827.557761589742
+    },
+    {
+      "lower": -1.0,
+      "upper": -0.5,
+      "hex": "#4aa5af",
+      "name": "ELEV_-1.00_to_-0.50_m",
+      "planAreaM2": 28298.913947766177
+    },
+    {
+      "lower": -0.5,
+      "upper": 0.0,
+      "hex": "#58b9b6",
+      "name": "ELEV_-0.50_to_+0.00_m",
+      "planAreaM2": 81549.56822367552
+    },
+    {
+      "lower": 0.0,
+      "upper": 0.5,
+      "hex": "#55b69d",
+      "name": "ELEV_+0.00_to_+0.50_m",
+      "planAreaM2": 84715.70454510773
+    },
+    {
+      "lower": 0.5,
+      "upper": 1.0,
+      "hex": "#63af6b",
+      "name": "ELEV_+0.50_to_+1.00_m",
+      "planAreaM2": 314320.99141146324
+    },
+    {
+      "lower": 1.0,
+      "upper": 1.5,
+      "hex": "#9ec667",
+      "name": "ELEV_+1.00_to_+1.50_m",
+      "planAreaM2": 751062.5951705693
+    },
+    {
+      "lower": 1.5,
+      "upper": 2.0,
+      "hex": "#cdd77e",
+      "name": "ELEV_+1.50_to_+2.00_m",
+      "planAreaM2": 409540.0202879132
+    },
+    {
+      "lower": 2.0,
+      "upper": 2.5,
+      "hex": "#e6d283",
+      "name": "ELEV_+2.00_to_+2.50_m",
+      "planAreaM2": 189327.74182136633
+    },
+    {
+      "lower": 2.5,
+      "upper": 3.0,
+      "hex": "#ecbf72",
+      "name": "ELEV_+2.50_to_+3.00_m",
+      "planAreaM2": 69368.58038542696
+    },
+    {
+      "lower": 3.0,
+      "upper": 3.5,
+      "hex": "#eaab64",
+      "name": "ELEV_+3.00_to_+3.50_m",
+      "planAreaM2": 39012.54382356351
+    },
+    {
+      "lower": 3.5,
+      "upper": 4.0,
+      "hex": "#de9356",
+      "name": "ELEV_+3.50_to_+4.00_m",
+      "planAreaM2": 9966.043799441402
+    },
+    {
+      "lower": 4.0,
+      "upper": 4.5,
+      "hex": "#cf7d4d",
+      "name": "ELEV_+4.00_to_+4.50_m",
+      "planAreaM2": 5541.197085201514
+    },
+    {
+      "lower": 4.5,
+      "upper": 5.0,
+      "hex": "#bf6a47",
+      "name": "ELEV_+4.50_to_+5.00_m",
+      "planAreaM2": 2794.4508216147597
+    },
+    {
+      "lower": 5.0,
+      "upper": 5.5,
+      "hex": "#ad5d46",
+      "name": "ELEV_+5.00_to_+5.50_m",
+      "planAreaM2": 6510.687636923212
+    },
+    {
+      "lower": 5.5,
+      "upper": 6.0,
+      "hex": "#9d574a",
+      "name": "ELEV_+5.50_to_+6.00_m",
+      "planAreaM2": 2045.342668402214
+    },
+    {
+      "lower": 6.0,
+      "upper": 6.5,
+      "hex": "#8c504e",
+      "name": "ELEV_+6.00_to_+6.50_m",
+      "planAreaM2": 1585.0643790914305
+    },
+    {
+      "lower": 6.5,
+      "upper": 7.0,
+      "hex": "#7a4951",
+      "name": "ELEV_+6.50_to_+7.00_m",
+      "planAreaM2": 4199.665717575309
+    }
+  ],
+  "lineSegments": {
+    "contours": 63576,
+    "qa": 16352
+  },
+  "qaRegions": 170,
+  "rawContourCrossingPairs": 188,
+  "qaAreaM2": 3603.41595,
+  "notes": [
+    "Surface and colours were read from the delivered SKP; no terrain was re-triangulated.",
+    "Browser axes: X=east, Y=original elevation, Z=south; coordinates in metres.",
+    "Contours were simplified within 0.10 m during the original terrain creation.",
+    "Review regions and source Z=0.9768 were excluded from the terrain.",
+    "Coverage is inferred, not a legal parcel boundary.",
+    "Displayed height is interpolated on the TIN, not a measured spot level.",
+    "Visual vertical exaggeration does not change reported elevations.",
+    "No hydraulic simulation."
+  ]
+}
