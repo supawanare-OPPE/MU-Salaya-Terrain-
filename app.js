@@ -200,9 +200,9 @@ async function initialize() {
     controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = false;
     controls.minZoom = 0.4; controls.maxZoom = 35; controls.zoomSpeed = 0.85; controls.rotateSpeed = 0.55; controls.screenSpacePanning = true;
     controls.listenToKeyEvents(host);
-    const metadata = fetch('./assets/model.json').then(r => { if (!r.ok) throw new Error('Model metadata unavailable'); return r.json(); });
+    const metadata = fetch('./model.json').then(r => { if (!r.ok) throw new Error('Model metadata unavailable'); return r.json(); });
     const loader = new GLTFLoader();
-    const gltf = await loader.loadAsync('./assets/salaya-terrain.glb', progress => {
+    const gltf = await loader.loadAsync('./salaya-terrain.glb', progress => {
       const percent = progress.total ? Math.min(95, progress.loaded / progress.total * 95) : 35;
       $('progress-fill').style.width = `${percent}%`;
       if (progress.total) $('loading-text').textContent = `โหลดโมเดล ${Math.round(percent)}% · ${format(progress.total / 1e6, 1)} MB`;
