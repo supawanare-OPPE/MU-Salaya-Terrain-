@@ -7,7 +7,11 @@ const host = $('canvas-host');
 const format = (n, digits = 2) => n.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
 const signed = (n, digits = 2) => `${n < -0.000001 ? '−' : '+'}${Math.abs(n).toFixed(digits)}`;
 let renderer, scene, camera, controls, model, terrain, contours, qa, grid, marker, meta;
-let terrainMeshes = [], selectedPoint = null, selectedBand = null, mode = '3d', exag = 20, frustum = 2600;
+let terrainMeshes = [], selectedPoint = null, selectedBand = null, mode = '3d', exag = 1, frustum = 2600;
+const MODEL_VERSION = '20261017-bb6c6053';
+let campus, basemap, buildingOutlines, waterEdges, needsRender = true;
+function invalidate() { needsRender = true; }
+for (const event of ['click', 'input', 'change']) document.addEventListener(event, invalidate);
 let pointerDown = null, dragDistance = 0, toastTimer, raf;
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
@@ -75,7 +79,7 @@ function fitView() {
 
 function setView(next) {
   if (!model) return;
-  mode = next; controls.target.set(0, 1.5 * exag, 0);
+  mode = next; controls.target.set(0, (1.5 + (meta?.terrainDisplayOffsetMetres || 0)) * exag, 0);
   camera.up.set(0, 1, 0);
   camera.position.copy(controls.target).add(next === 'top' ? new THREE.Vector3(0, 3200, 0.001) : new THREE.Vector3(1500, 1900, 2100));
   controls.enableRotate = next !== 'top'; controls.minPolarAngle = next === 'top' ? 0 : 0.04;
@@ -152,18 +156,22 @@ function pickPoint(event) {
   pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
   model.updateMatrixWorld(true); raycaster.setFromCamera(pointer, camera);
   const hit = raycaster.intersectObjects(terrainMeshes, false)[0];
-  if (!hit) { toast('จุดนี้อยู่นอกผิวโมเดล หรือเป็นบริเวณที่เว้นไว้ตรวจสอบ'); return; }
+  if (!hit) { toast('จุดนี้อยู่นอกผิวภูมิประเทศ หรือเป็นบริเวณที่เว้นไว้ตรวจสอบ'); return; }
   const local = model.worldToLocal(hit.point.clone()); const band = meta.palette[hit.object.userData.band];
   const easting = local.x + meta.webCenterLocalMetres[0] + meta.utmOffset[0];
   const northing = -local.z + meta.webCenterLocalMetres[1] + meta.utmOffset[1];
-  selectedPoint = { local, elevation: local.y, easting, northing, band: hit.object.userData.band };
+  const elevation = local.y - (meta.terrainDisplayOffsetMetres || 0);
+  selectedPoint = { local, elevation, easting, northing, band: hit.object.userData.band };
   $('point-empty').hidden = true; $('point-values').hidden = false; $('clear-point').hidden = false;
-  $('selected-height').innerHTML = `${signed(local.y)}<small>ม.</small>`;
-  $('pin-height').textContent = `${signed(local.y)} ม.`;
+  $('selected-height').innerHTML = `${signed(elevation)}<small>ม.</small>`;
+  $('pin-height').textContent = `${signed(elevation)} ม.`;
   $('point-band-text').textContent = `${signed(band.lower)} ถึง ${signed(band.upper)} ม.`;
   $('point-swatch').style.background = band.hex;
   $('point-e').textContent = format(easting); $('point-n').textContent = format(northing);
   setPanel('explore'); updatePin();
+}
+for (const [id, getLayer] of [['campus-toggle', () => campus], ['basemap-toggle', () => basemap], ['buildings-toggle', () => buildingOutlines], ['water-toggle', () => waterEdges]]) {
+  $(id).onchange = event => { const layer = getLayer(); if (layer) layer.visible = event.target.checked; };
 }
 $('terrain-toggle').onchange = event => { if (terrain) { terrain.visible = event.target.checked; updatePin(); } };
 $('contour-toggle').onchange = event => { if (contours) contours.visible = event.target.checked; };
@@ -177,7 +185,7 @@ async function snapshot() {
     output.width = source.width; output.height = source.height + 145;
     const ctx = output.getContext('2d'); ctx.fillStyle = '#fafbf6'; ctx.fillRect(0, 0, output.width, output.height); ctx.drawImage(source, 0, 0);
     ctx.fillStyle = '#183e34'; ctx.font = '19px Arial'; ctx.fillText(`MAHIDOL SALAYA · TERRAIN EXPLORER | ${mode === 'top' ? 'Top view' : '3D view'} | Vertical display x${exag}`, 24, source.height + 31);
-    ctx.font = '12px Arial'; ctx.fillStyle = '#6a7e5b'; ctx.fillText('Original elevations (m) · Source: Salaya_Elevation_Terrain.skp · Gaps = data review areas', 24, source.height + 56);
+    ctx.font = '12px Arial'; ctx.fillStyle = '#6a7e5b'; ctx.fillText('Original elevations (m) · Source: ${meta.source} · Gaps = data review areas', 24, source.height + 56);
     const width = output.width - 48;
     meta.palette.forEach((item, i) => { ctx.fillStyle = item.hex; ctx.fillRect(24 + i * width / 22, source.height + 73, width / 22 + 1, 17); });
     ctx.fillStyle = '#536b45'; ctx.font = '11px Arial';
@@ -199,10 +207,10 @@ async function initialize() {
     scene = new THREE.Scene(); camera = new THREE.OrthographicCamera(-1500, 1500, 1500, -1500, 1, 20000);
     controls = new OrbitControls(camera, renderer.domElement); controls.enableDamping = false;
     controls.minZoom = 0.4; controls.maxZoom = 35; controls.zoomSpeed = 0.85; controls.rotateSpeed = 0.55; controls.screenSpacePanning = true;
-    controls.listenToKeyEvents(host);
-    const metadata = fetch('./model.json').then(r => { if (!r.ok) throw new Error('Model metadata unavailable'); return r.json(); });
+    controls.listenToKeyEvents(host); controls.addEventListener('change', invalidate);
+    const metadata = fetch(`./model.json?v=${MODEL_VERSION}`).then(r => { if (!r.ok) throw new Error('Model metadata unavailable'); return r.json(); });
     const loader = new GLTFLoader();
-    const gltf = await loader.loadAsync('./salaya-terrain.glb', progress => {
+    const gltf = await loader.loadAsync(`./salaya-terrain.glb?v=${MODEL_VERSION}`, progress => {
       const percent = progress.total ? Math.min(95, progress.loaded / progress.total * 95) : 35;
       $('progress-fill').style.width = `${percent}%`;
       if (progress.total) $('loading-text').textContent = `โหลดโมเดล ${Math.round(percent)}% · ${format(progress.total / 1e6, 1)} MB`;
@@ -219,6 +227,9 @@ async function initialize() {
     });
     const faceCount = terrainMeshes.reduce((sum, object) => sum + object.geometry.index.count / 3, 0);
     if (faceCount !== meta.faces) throw new Error('Model face count differs from source');
+    buildingOutlines = model.getObjectByName('building_outlines'); waterEdges = model.getObjectByName('water_edges');
+    if (buildingOutlines) buildingOutlines.visible = false; if (waterEdges) waterEdges.visible = false;
+    campus = new THREE.Group(); campus.name = 'campus'; basemap = new THREE.Group(); basemap.name = 'basemap'; model.add(campus, basemap);
     scene.add(model); contours.visible = false; contours.position.y = 0.025; qa.visible = false;
     contours.material.transparent = true; contours.material.opacity = 0.58;
     qa.material.depthTest = false; qa.renderOrder = 10;
@@ -227,9 +238,10 @@ async function initialize() {
     marker.renderOrder = 20; marker.visible = false; scene.add(marker);
     setExaggeration(exag); buildLegend(); setView('3d');
     $('loading').hidden = true; $('progress-fill').style.width = '100%';
-    $('glb-size').textContent = 'ผิวภูมิประเทศ คอนทัวร์ และบริเวณตรวจสอบ · 6.5 MB';
+    $('glb-size').textContent = `ผิวภูมิประเทศ เส้นอ้างอิง และบริเวณตรวจสอบ · ${format(meta.terrainGlbBytes / 1e6, 1)} MB`;
+    $('context-status').textContent = 'กำลังโหลดอาคารและภาพแผนที่…';
     host.dataset.ready = 'true'; host.dataset.faceCount = String(faceCount);
-    new ResizeObserver(() => { updateSize(); fitView(); }).observe(host);
+    new ResizeObserver(() => { updateSize(); fitView(); invalidate(); }).observe(host);
     renderer.domElement.addEventListener('pointerdown', event => { pointerDown = { x: event.clientX, y: event.clientY, id: event.pointerId, button: event.button }; dragDistance = 0; });
     renderer.domElement.addEventListener('pointermove', event => { if (pointerDown) dragDistance = Math.max(dragDistance, Math.hypot(event.clientX - pointerDown.x, event.clientY - pointerDown.y)); });
     renderer.domElement.addEventListener('pointerup', event => {
@@ -240,7 +252,9 @@ async function initialize() {
     renderer.domElement.addEventListener('webglcontextlost', event => { event.preventDefault(); toast('การแสดงผล 3 มิติหยุดชั่วคราว กำลังรอการเชื่อมต่อภาพกลับมา'); });
     renderer.domElement.addEventListener('webglcontextrestored', () => toast('การแสดงผล 3 มิติกลับมาพร้อมใช้งานแล้ว'));
     function animate() {
-      raf = requestAnimationFrame(animate); controls.update(); updatePin();
+      raf = requestAnimationFrame(animate); controls.update();
+      if (!needsRender) return;
+      needsRender = false; updatePin();
       const north = controls.target.clone().add(new THREE.Vector3(0, 0, -200)).project(camera);
       const origin = controls.target.clone().project(camera);
       const angle = Math.atan2((north.x - origin.x) * host.clientWidth, (north.y - origin.y) * host.clientHeight) * 180 / Math.PI;
@@ -248,13 +262,32 @@ async function initialize() {
       renderer.render(scene, camera);
     }
     animate();
+    loadContext(loader);
     // Read-only QA hook: coordinates and original model data, no user content or state mutation.
-    window.terrainInspection = () => ({ faces: faceCount, bands: terrainMeshes.length, exag, view: mode, selectedBand, selectedPoint: selectedPoint ? { elevation: selectedPoint.elevation, easting: selectedPoint.easting, northing: selectedPoint.northing, band: selectedPoint.band } : null, layers: { terrain: terrain.visible, contours: contours.visible, qa: qa.visible }, sourceSha256: meta.sourceSha256, renderer: renderer.info.render });
+    window.terrainInspection = () => ({ faces: faceCount, bands: terrainMeshes.length, exag, view: mode, selectedBand, selectedPoint: selectedPoint ? { elevation: selectedPoint.elevation, easting: selectedPoint.easting, northing: selectedPoint.northing, band: selectedPoint.band } : null, layers: { terrain: terrain.visible, contours: contours.visible, qa: qa.visible, campus: campus.visible, basemap: basemap.visible }, sourceSha256: meta.sourceSha256, contextReady: host.dataset.contextReady, contextFiles: meta.contextFiles?.length, displayOffset: meta.terrainDisplayOffsetMetres, renderer: renderer.info.render });
   } catch (error) {
     console.error('Terrain viewer:', error); if (raf) cancelAnimationFrame(raf);
     $('loading').hidden = true; $('load-error').hidden = false;
-    $('error-message').textContent = 'เบราว์เซอร์อาจไม่รองรับ WebGL หรือโหลดไฟล์ไม่ครบ ลองโหลดหน้าใหม่ หรือเปิดแผนที่ระดับสีแบบภาพด้านล่าง';
+    $('error-message').textContent = `เปิดโมเดลไม่สำเร็จ: ${error.message || 'โปรดตรวจการเชื่อมต่อและลองอีกครั้ง'}`;
     host.dataset.ready = 'error';
+  }
+}
+async function loadContext(loader) {
+  host.dataset.contextReady = 'loading';
+  let complete = 0;
+  try {
+    for (const file of meta.contextFiles || []) {
+      $('context-status').textContent = `กำลังโหลดอาคารและภาพแผนที่ ${complete}/${meta.contextFiles.length}`;
+      const part = await loader.loadAsync(`./${file.url}?v=${MODEL_VERSION}`);
+      (file.role === 'basemap' ? basemap : campus).add(part.scene);
+      complete++; invalidate();
+    }
+    host.dataset.contextReady = 'true';
+    $('context-status').textContent = 'อาคารและภาพแผนที่พร้อมแล้ว';
+  } catch (error) {
+    console.error('Campus layers:', error);
+    host.dataset.contextReady = 'error';
+    $('context-status').textContent = 'โหลดอาคารหรือภาพแผนที่ไม่ครบ กรุณาโหลดหน้าใหม่';
   }
 }
 initialize();

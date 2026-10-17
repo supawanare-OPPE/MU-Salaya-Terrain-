@@ -1,6 +1,9 @@
 {
-  "source": "Salaya_Elevation_Terrain.skp",
-  "sourceSha256": "edc26517bdbbd5bd5522e16a7ad3cec9f996783559e4c80273b328a3854b1f44",
+  "terrainDisplayOffsetMetres": 6.001096134899991,
+  "sourceBytes": 187191007,
+  "updatedDate": "2026-10-17",
+  "source": "MU_Salaya_Terrain_Map_3D_OK.skp",
+  "sourceSha256": "bb6c6053a1486751747d6de571dc125a0a3ccbdb1a707ebb9db21e2216c2e6b0",
   "nativeReader": "SketchUp 2025 C API",
   "faces": 178183,
   "vertices": 99378,
@@ -187,7 +190,9 @@
   ],
   "lineSegments": {
     "contours": 63576,
-    "qa": 16352
+    "qa": 16352,
+    "building_outlines": 12945,
+    "water_edges": 3486
   },
   "qaRegions": 170,
   "rawContourCrossingPairs": 188,
@@ -200,6 +205,46 @@
     "Coverage is inferred, not a legal parcel boundary.",
     "Displayed height is interpolated on the TIN, not a measured spot level.",
     "Visual vertical exaggeration does not change reported elevations.",
-    "No hydraulic simulation."
-  ]
+    "No hydraulic simulation.",
+    "User confirmed terrain vertical translation is for display only; reported survey levels remain -4 to +7 metres.",
+    "Contour and review overlays follow the terrain display offset; campus and basemap transforms are preserved from SKP."
+  ],
+  "contextFiles": [
+    {
+      "url": "mu-campus-00.glb",
+      "role": "campus",
+      "bytes": 18256520,
+      "triangles": 441310,
+      "storedTriangles": 441310,
+      "instancedGroups": 0
+    },
+    {
+      "url": "mu-campus-01.glb",
+      "role": "campus",
+      "bytes": 18722580,
+      "triangles": 346212,
+      "storedTriangles": 346212,
+      "instancedGroups": 0
+    },
+    {
+      "url": "mu-campus-02.glb",
+      "role": "campus",
+      "bytes": 3124776,
+      "triangles": 2826512,
+      "storedTriangles": 44482,
+      "instancedGroups": 62
+    },
+    {
+      "url": "mu-basemap-00.glb",
+      "role": "basemap",
+      "bytes": 8797448,
+      "triangles": 96,
+      "storedTriangles": 96,
+      "instancedGroups": 0
+    }
+  ],
+  "contextTriangles": 3614130,
+  "contextTextureMaxDimension": 1024,
+  "terrainGlbBytes": 6851432,
+  "sourceDownloadUrl": "https://github.com/supawanare-OPPE/MU-Salaya-Terrain-/releases/download/model-20261017/MU_Salaya_Terrain_Map_3D_OK.skp"
 }
