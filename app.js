@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
+import { ROAD_DATUM, MIN_WATER_CM, MAX_WATER_CM, WATER_STEP_CM, surveyWaterLevel, relativeGroundLevel, waterDepth, inundatedArea } from './flood-math.mjs?v=rainbomb-050-v1';
 
 const $ = id => document.getElementById(id);
 const host = $('canvas-host');
@@ -10,6 +11,9 @@ let renderer, scene, camera, controls, model, terrain, contours, qa, grid, marke
 let terrainMeshes = [], selectedPoint = null, selectedBand = null, mode = '3d', exag = 1, frustum = 2600;
 const MODEL_VERSION = '20261017-bb6c6053';
 let campus, basemap, buildingOutlines, waterEdges, needsRender = true;
+let floodMesh, floodMaterial, floodTriangles, floodPlanArea = 0, floodEnabled = false, floodVisited = false;
+let waterCm = MIN_WATER_CM, activePanel = 'explore';
+const floodAreaCache = new Map();
 function invalidate() { needsRender = true; }
 for (const event of ['click', 'input', 'change']) document.addEventListener(event, invalidate);
 let pointerDown = null, dragDistance = 0, toastTimer, raf;
@@ -22,18 +26,26 @@ function toast(message) {
 }
 
 function setPanel(name) {
-  for (const key of ['explore', 'colors']) {
+  activePanel = name;
+  $('sidebar').classList.toggle('flood-panel-active', name === 'flood');
+  for (const key of ['explore', 'flood', 'colors']) {
     const active = key === name;
     $(`tab-${key}`).setAttribute('aria-selected', String(active));
     $(`tab-${key}`).tabIndex = active ? 0 : -1;
     $(`${key}-panel`).hidden = !active;
   }
+  if (name === 'flood' && !floodVisited && floodMesh) {
+    floodVisited = true; setFloodEnabled(true);
+  }
 }
-for (const name of ['explore', 'colors']) {
+const panelNames = ['explore', 'flood', 'colors'];
+for (const name of panelNames) {
   $(`tab-${name}`).onclick = () => setPanel(name);
   $(`tab-${name}`).onkeydown = event => {
     if (['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
-      event.preventDefault(); const target = name === 'explore' ? 'colors' : 'explore';
+      event.preventDefault();
+      const index = panelNames.indexOf(name);
+      const target = event.key === 'Home' ? panelNames[0] : event.key === 'End' ? panelNames.at(-1) : panelNames[(index + (event.key === 'ArrowRight' ? 1 : -1) + panelNames.length) % panelNames.length];
       setPanel(target); $(`tab-${target}`).focus();
     }
   };
@@ -137,6 +149,7 @@ function buildLegend() {
 function clearPoint() {
   selectedPoint = null; if (marker) marker.visible = false;
   $('pin-label').hidden = true; $('point-values').hidden = true; $('point-empty').hidden = false; $('clear-point').hidden = true;
+  updateFloodPoint();
 }
 $('clear-point').onclick = clearPoint;
 function updatePin() {
@@ -168,8 +181,152 @@ function pickPoint(event) {
   $('point-band-text').textContent = `${signed(band.lower)} ถึง ${signed(band.upper)} ม.`;
   $('point-swatch').style.background = band.hex;
   $('point-e').textContent = format(easting); $('point-n').textContent = format(northing);
-  setPanel('explore'); updatePin();
+  if (activePanel !== 'flood') setPanel('explore');
+  updateFloodPoint(); updatePin();
 }
+function buildFloodLayer() {
+  model.updateMatrixWorld(true);
+  const inverse = model.matrixWorld.clone().invert();
+  const chunks = [], parts = [], shared = new Map();
+  let vertexCount = 0, indexCount = 0;
+  for (const mesh of terrainMeshes) {
+    const attribute = mesh.geometry.attributes.position;
+    const transform = inverse.clone().multiply(mesh.matrixWorld);
+    const key = transform.elements.join(',');
+    if (!shared.has(attribute.array)) shared.set(attribute.array, new Map());
+    const variants = shared.get(attribute.array);
+    let chunk = variants.get(key);
+    if (!chunk) {
+      chunk = { attribute, transform, offset: vertexCount };
+      variants.set(key, chunk); chunks.push(chunk); vertexCount += attribute.count;
+    }
+    parts.push({ mesh, chunk }); indexCount += mesh.geometry.index.count;
+  }
+  const positions = new Float32Array(vertexCount * 3);
+  const heights = new Float32Array(vertexCount);
+  const indices = new Uint32Array(indexCount);
+  const point = new THREE.Vector3();
+  for (const chunk of chunks) {
+    for (let i = 0; i < chunk.attribute.count; i++) {
+      point.fromBufferAttribute(chunk.attribute, i).applyMatrix4(chunk.transform);
+      const n = chunk.offset + i;
+      positions.set([point.x, point.y, point.z], n * 3);
+      // Remove source placement; round only sub-micrometre cancellation noise.
+      heights[n] = Math.round((point.y - (meta.terrainDisplayOffsetMetres || 0)) * 1e6) / 1e6;
+    }
+  }
+  let cursor = 0;
+  for (const { mesh, chunk } of parts) {
+    for (const index of mesh.geometry.index.array) indices[cursor++] = index + chunk.offset;
+  }
+  floodTriangles = new Float64Array(indexCount / 3 * 4);
+  for (let i = 0, j = 0; i < indices.length; i += 3, j += 4) {
+    const a = indices[i], b = indices[i + 1], c = indices[i + 2];
+    const area = Math.abs((positions[b * 3] - positions[a * 3]) * (positions[c * 3 + 2] - positions[a * 3 + 2]) - (positions[c * 3] - positions[a * 3]) * (positions[b * 3 + 2] - positions[a * 3 + 2])) / 2;
+    const sorted = [heights[a], heights[b], heights[c]].sort((x, y) => x - y);
+    floodTriangles.set([...sorted, area], j); floodPlanArea += area;
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  geometry.setAttribute('surveyHeight', new THREE.BufferAttribute(heights, 1));
+  geometry.setIndex(new THREE.BufferAttribute(indices, 1));
+  geometry.computeBoundingSphere();
+  floodMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      surveyWater: { value: surveyWaterLevel(waterCm) },
+      displayWater: { value: surveyWaterLevel(waterCm) + (meta.terrainDisplayOffsetMetres || 0) },
+      waterColour: { value: new THREE.Color('#8ddaf2') }
+    },
+    vertexShader: `
+      attribute float surveyHeight;
+      varying float groundHeight;
+      uniform float displayWater;
+      void main() {
+        groundHeight = surveyHeight;
+        vec3 waterPosition = vec3(position.x, displayWater, position.z);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(waterPosition, 1.0);
+      }`,
+    fragmentShader: `
+      varying float groundHeight;
+      uniform float surveyWater;
+      uniform vec3 waterColour;
+      void main() {
+        if (surveyWater - groundHeight <= 0.00001) discard;
+        gl_FragColor = vec4(waterColour, 0.48);
+        #include <tonemapping_fragment>
+        #include <colorspace_fragment>
+      }`,
+    transparent: true, depthWrite: false, side: THREE.DoubleSide
+  });
+  floodMesh = new THREE.Mesh(geometry, floodMaterial);
+  floodMesh.name = 'rain_bomb_water'; floodMesh.visible = false; model.add(floodMesh);
+  $('flood-controls').disabled = false;
+  $('flood-datum').textContent = `${signed(ROAD_DATUM)} ม. เดิม = 0.00 ม. ในสถานการณ์`;
+  updateFlood();
+  if (activePanel === 'flood') { floodVisited = true; setFloodEnabled(true); }
+}
+
+function setFloodEnabled(enabled) {
+  floodEnabled = enabled && Boolean(floodMesh);
+  $('flood-toggle').checked = floodEnabled;
+  if (floodMesh) floodMesh.visible = floodEnabled;
+  $('flood-map-status').hidden = !floodEnabled;
+  $('flood-off-note').hidden = floodEnabled;
+  $('flood-panel').dataset.enabled = String(floodEnabled);
+  updateFloodPoint(); invalidate();
+}
+
+function setWaterLevel(value) {
+  waterCm = Math.max(MIN_WATER_CM, Math.min(MAX_WATER_CM, Math.round(value / WATER_STEP_CM) * WATER_STEP_CM));
+  if (floodMesh) setFloodEnabled(true);
+  updateFlood();
+}
+
+function updateFlood() {
+  const level = surveyWaterLevel(waterCm);
+  $('flood-level').value = waterCm;
+  $('flood-level').setAttribute('aria-valuetext', `${waterCm} เซนติเมตรเหนือระดับอ้างอิงถนนเทิดจักรี`);
+  $('flood-level-value').textContent = `${waterCm} ซม.`;
+  $('flood-survey-level').textContent = `${signed(level)} ม.`;
+  $('flood-map-level').textContent = `Rain Bomb · น้ำ +${waterCm} ซม.`;
+  $('flood-minus').disabled = waterCm <= MIN_WATER_CM;
+  $('flood-plus').disabled = waterCm >= MAX_WATER_CM;
+  document.querySelectorAll('[data-water-cm]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.waterCm) === waterCm)));
+  if (!floodMesh) return;
+  floodMaterial.uniforms.surveyWater.value = level;
+  floodMaterial.uniforms.displayWater.value = level + (meta.terrainDisplayOffsetMetres || 0);
+  if (!floodAreaCache.has(waterCm)) floodAreaCache.set(waterCm, inundatedArea(floodTriangles, level));
+  const area = floodAreaCache.get(waterCm);
+  $('flood-area').textContent = format(area / 1600, 1);
+  $('flood-percent').textContent = `${format(area / floodPlanArea * 100, 1)}% ของผิวโมเดลที่มีข้อมูล`;
+  $('flood-area').dataset.squareMetres = area.toFixed(3);
+  $('flood-panel').dataset.surveyWater = level.toFixed(2);
+  updateFloodPoint(); invalidate();
+}
+
+function updateFloodPoint() {
+  $('flood-point-empty').hidden = Boolean(selectedPoint);
+  $('flood-point-values').hidden = !selectedPoint;
+  $('flood-clear-point').hidden = !selectedPoint;
+  $('pin-flood-depth').hidden = !floodEnabled || !selectedPoint;
+  if (!selectedPoint) return;
+  const depth = waterDepth(selectedPoint.elevation, waterCm);
+  $('flood-point-ground').textContent = `${signed(relativeGroundLevel(selectedPoint.elevation))} ม.`;
+  $('flood-point-survey').textContent = `ระดับเดิม ${signed(selectedPoint.elevation)} ม.`;
+  $('flood-point-depth').textContent = `${format(depth * 100, 1)} ซม.`;
+  $('flood-point-state').textContent = depth > 0.00001 ? 'พื้นดินต่ำกว่าผิวน้ำที่เลือก' : 'พื้นดินเท่ากับหรือสูงกว่าผิวน้ำที่เลือก';
+  $('pin-title').textContent = floodEnabled ? 'พื้นดินเทียบถนนเทิดจักรี' : 'ระดับสำรวจบนผิวภูมิประเทศ';
+  $('pin-height').textContent = `${signed(floodEnabled ? relativeGroundLevel(selectedPoint.elevation) : selectedPoint.elevation)} ม.`;
+  $('pin-flood-depth').textContent = `ความลึกน้ำ ${format(depth * 100, 1)} ซม.`;
+}
+
+$('flood-toggle').onchange = event => setFloodEnabled(event.target.checked);
+$('flood-level').oninput = event => setWaterLevel(Number(event.target.value));
+$('flood-minus').onclick = () => setWaterLevel(waterCm - WATER_STEP_CM);
+$('flood-plus').onclick = () => setWaterLevel(waterCm + WATER_STEP_CM);
+$('flood-clear-point').onclick = clearPoint;
+for (const button of document.querySelectorAll('[data-water-cm]')) button.onclick = () => setWaterLevel(Number(button.dataset.waterCm));
+
 for (const [id, getLayer] of [['campus-toggle', () => campus], ['basemap-toggle', () => basemap], ['buildings-toggle', () => buildingOutlines], ['water-toggle', () => waterEdges]]) {
   $(id).onchange = event => { const layer = getLayer(); if (layer) layer.visible = event.target.checked; };
 }
@@ -185,15 +342,25 @@ async function snapshot() {
     output.width = source.width; output.height = source.height + 145;
     const ctx = output.getContext('2d'); ctx.fillStyle = '#fafbf6'; ctx.fillRect(0, 0, output.width, output.height); ctx.drawImage(source, 0, 0);
     ctx.fillStyle = '#183e34'; ctx.font = '19px Arial'; ctx.fillText(`MAHIDOL SALAYA · TERRAIN EXPLORER | ${mode === 'top' ? 'Top view' : '3D view'} | Vertical display x${exag}`, 24, source.height + 31);
-    ctx.font = '12px Arial'; ctx.fillStyle = '#6a7e5b'; ctx.fillText('Original elevations (m) · Source: ${meta.source} · Gaps = data review areas', 24, source.height + 56);
+    ctx.font = '12px Arial'; ctx.fillStyle = '#6a7e5b';
     const width = output.width - 48;
-    meta.palette.forEach((item, i) => { ctx.fillStyle = item.hex; ctx.fillRect(24 + i * width / 22, source.height + 73, width / 22 + 1, 17); });
-    ctx.fillStyle = '#536b45'; ctx.font = '11px Arial';
-    for (const value of [-4, -2, 0, 2, 4, 7]) { const x = 24 + (value + 4) / 11 * width; ctx.textAlign = value === -4 ? 'left' : value === 7 ? 'right' : 'center'; ctx.fillText(`${signed(value, 1)} m`, x, source.height + 108); }
-    ctx.textAlign = 'left'; ctx.font = '10px Arial'; ctx.fillText('Colour interval: 0.50 m. Web display preserves the original SKP surface and material colours.', 24, source.height + 131);
+    if (floodEnabled) {
+      ctx.fillText(`RAIN BOMB | Water +${waterCm} cm above road datum | New 0.00 m = survey ${signed(ROAD_DATUM)} m`, 24, source.height + 56);
+      ctx.fillStyle = '#8ddaf2'; ctx.fillRect(24, source.height + 73, 20, 17);
+      ctx.fillStyle = '#326875'; ctx.font = '11px Arial';
+      ctx.fillText(`Area below water: ${format(floodAreaCache.get(waterCm) / 1600, 1)} rai | Water survey elevation ${signed(surveyWaterLevel(waterCm))} m`, 54, source.height + 86);
+      ctx.fillText('Static water-level comparison. Includes existing low ponds/canals; data gaps excluded.', 24, source.height + 108);
+      ctx.font = '10px Arial'; ctx.fillText(`Source: ${meta.source} | No rainfall, drainage or flow modelling.`, 24, source.height + 131);
+    } else {
+      ctx.fillText(`Original elevations (m) · Source: ${meta.source} · Gaps = data review areas`, 24, source.height + 56);
+      meta.palette.forEach((item, i) => { ctx.fillStyle = item.hex; ctx.fillRect(24 + i * width / 22, source.height + 73, width / 22 + 1, 17); });
+      ctx.fillStyle = '#536b45'; ctx.font = '11px Arial';
+      for (const value of [-4, -2, 0, 2, 4, 7]) { const x = 24 + (value + 4) / 11 * width; ctx.textAlign = value === -4 ? 'left' : value === 7 ? 'right' : 'center'; ctx.fillText(`${signed(value, 1)} m`, x, source.height + 108); }
+      ctx.textAlign = 'left'; ctx.font = '10px Arial'; ctx.fillText('Colour interval: 0.50 m. Web display preserves the original SKP surface and material colours.', 24, source.height + 131);
+    }
     const blob = await new Promise(resolve => output.toBlob(resolve, 'image/png'));
     if (!blob) throw new Error('PNG export failed');
-    const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `Mahidol_Salaya_${mode}_Zx${exag}.png`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 20000);
+    const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = `Mahidol_Salaya_${floodEnabled ? `RainBomb_${waterCm}cm_` : ''}${mode}_Zx${exag}.png`; a.click(); setTimeout(() => URL.revokeObjectURL(url), 20000);
     toast('บันทึกภาพมุมมองพร้อมแถบสีแล้ว');
   } catch { toast('บันทึกภาพไม่สำเร็จ กรุณาลองอีกครั้ง'); }
 }
@@ -236,7 +403,7 @@ async function initialize() {
     grid = new THREE.GridHelper(3000, 30, '#c7d0bf', '#c7d0bf'); grid.material.transparent = true; grid.material.opacity = 0.3; scene.add(grid);
     marker = new THREE.Mesh(new THREE.RingGeometry(0.7, 1.1, 24), new THREE.MeshBasicMaterial({ color: '#183e34', side: THREE.DoubleSide, depthTest: false }));
     marker.renderOrder = 20; marker.visible = false; scene.add(marker);
-    setExaggeration(exag); buildLegend(); setView('3d');
+    buildFloodLayer(); setExaggeration(exag); buildLegend(); setView('3d');
     $('loading').hidden = true; $('progress-fill').style.width = '100%';
     $('glb-size').textContent = `ผิวภูมิประเทศ เส้นอ้างอิง และบริเวณตรวจสอบ · ${format(meta.terrainGlbBytes / 1e6, 1)} MB`;
     $('context-status').textContent = 'กำลังโหลดอาคารและภาพแผนที่…';
