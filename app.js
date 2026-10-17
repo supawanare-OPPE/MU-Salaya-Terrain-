@@ -9,7 +9,7 @@ const format = (n, digits = 2) => n.toLocaleString('en-US', { minimumFractionDig
 const signed = (n, digits = 2) => `${n < -0.000001 ? '−' : '+'}${Math.abs(n).toFixed(digits)}`;
 let renderer, scene, camera, controls, model, terrain, contours, qa, grid, marker, meta;
 let terrainMeshes = [], selectedPoint = null, selectedBand = null, mode = '3d', exag = 1, frustum = 2600;
-const MODEL_VERSION = '20261017-bb6c6053';
+const MODEL_VERSION = '20261017-02-66f7b8ce';
 let campus, basemap, buildingOutlines, waterEdges, needsRender = true;
 let floodMesh, floodMaterial, floodTriangles, floodPlanArea = 0, floodEnabled = false, floodVisited = false;
 let waterCm = MIN_WATER_CM, activePanel = 'explore';

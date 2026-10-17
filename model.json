@@ -1,9 +1,9 @@
 {
   "terrainDisplayOffsetMetres": 6.001096134899991,
-  "sourceBytes": 187191007,
+  "sourceBytes": 187132329,
   "updatedDate": "2026-10-17",
-  "source": "MU_Salaya_Terrain_Map_3D_OK.skp",
-  "sourceSha256": "bb6c6053a1486751747d6de571dc125a0a3ccbdb1a707ebb9db21e2216c2e6b0",
+  "source": "MU_Salaya_Terrain_Map_3D_OK02.skp",
+  "sourceSha256": "66f7b8ce1d41d31815ba5e7d1ed9c74b7b30a16925c3edad95129a5001a875b5",
   "nativeReader": "SketchUp 2025 C API",
   "faces": 178183,
   "vertices": 99378,
@@ -211,28 +211,20 @@
   ],
   "contextFiles": [
     {
-      "url": "mu-campus-00.glb",
+      "url": "mu-campus-v02-00.glb",
       "role": "campus",
-      "bytes": 18256520,
-      "triangles": 441310,
-      "storedTriangles": 441310,
+      "bytes": 23041472,
+      "triangles": 552447,
+      "storedTriangles": 552447,
       "instancedGroups": 0
     },
     {
-      "url": "mu-campus-01.glb",
+      "url": "mu-campus-v02-01.glb",
       "role": "campus",
-      "bytes": 18722580,
-      "triangles": 346212,
-      "storedTriangles": 346212,
-      "instancedGroups": 0
-    },
-    {
-      "url": "mu-campus-02.glb",
-      "role": "campus",
-      "bytes": 3124776,
-      "triangles": 2826512,
-      "storedTriangles": 44482,
-      "instancedGroups": 62
+      "bytes": 16131912,
+      "triangles": 3061564,
+      "storedTriangles": 279522,
+      "instancedGroups": 63
     },
     {
       "url": "mu-basemap-00.glb",
@@ -243,8 +235,8 @@
       "instancedGroups": 0
     }
   ],
-  "contextTriangles": 3614130,
+  "contextTriangles": 3614107,
   "contextTextureMaxDimension": 1024,
-  "terrainGlbBytes": 6851432,
-  "sourceDownloadUrl": "https://github.com/supawanare-OPPE/MU-Salaya-Terrain-/releases/download/model-20261017/MU_Salaya_Terrain_Map_3D_OK.skp"
+  "terrainGlbBytes": 6851436,
+  "sourceDownloadUrl": "https://github.com/supawanare-OPPE/MU-Salaya-Terrain-/releases/download/model-20261017-02/MU_Salaya_Terrain_Map_3D_OK02.skp"
 }
