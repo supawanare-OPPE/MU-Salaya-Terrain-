@@ -1,9 +1,9 @@
 {
   "terrainDisplayOffsetMetres": 6.001096134899991,
-  "sourceBytes": 187132329,
-  "updatedDate": "2026-10-17",
-  "source": "MU_Salaya_Terrain_Map_3D_OK02.skp",
-  "sourceSha256": "66f7b8ce1d41d31815ba5e7d1ed9c74b7b30a16925c3edad95129a5001a875b5",
+  "sourceBytes": 187212854,
+  "updatedDate": "2026-10-21",
+  "source": "MU_Salaya_Terrain_Map_3D_OK03.skp",
+  "sourceSha256": "3f4b03e5c7268373b24e2482a4feda2573f500f9a0a0644ca6d33e453893531e",
   "nativeReader": "SketchUp 2025 C API",
   "faces": 178183,
   "vertices": 99378,
@@ -211,19 +211,19 @@
   ],
   "contextFiles": [
     {
-      "url": "mu-campus-v02-00.glb",
+      "url": "mu-campus-v03-00.glb",
       "role": "campus",
-      "bytes": 23041472,
-      "triangles": 552447,
-      "storedTriangles": 552447,
+      "bytes": 23041352,
+      "triangles": 552445,
+      "storedTriangles": 552445,
       "instancedGroups": 0
     },
     {
-      "url": "mu-campus-v02-01.glb",
+      "url": "mu-campus-v03-01.glb",
       "role": "campus",
-      "bytes": 16131912,
-      "triangles": 3061564,
-      "storedTriangles": 279522,
+      "bytes": 16132876,
+      "triangles": 3061566,
+      "storedTriangles": 279524,
       "instancedGroups": 63
     },
     {
@@ -233,10 +233,29 @@
       "triangles": 96,
       "storedTriangles": 96,
       "instancedGroups": 0
+    },
+    {
+      "url": "mu-campus-edges-v03.glb",
+      "role": "campus",
+      "bytes": 16936068,
+      "lineSegments": 1063180,
+      "edgeColor": "#565656"
+    },
+    {
+      "url": "mu-basemap-edges-v03.glb",
+      "role": "basemap",
+      "bytes": 1212,
+      "lineSegments": 7,
+      "edgeColor": "#565656"
     }
   ],
   "contextTriangles": 3614107,
   "contextTextureMaxDimension": 1024,
   "terrainGlbBytes": 6851436,
-  "sourceDownloadUrl": "https://github.com/supawanare-OPPE/MU-Salaya-Terrain-/releases/download/model-20261017-02/MU_Salaya_Terrain_Map_3D_OK02.skp"
+  "sourceDownloadUrl": "https://github.com/supawanare-OPPE/MU-Salaya-Terrain-/releases/download/model-20261021-03/MU_Salaya_Terrain_Map_3D_OK03.skp",
+  "nativeEdgeStyle": {
+    "color": "#565656",
+    "hiddenAndSoftEdgesExcluded": true,
+    "terrainEdgesHiddenInSource": true
+  }
 }
