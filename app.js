@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
-import { ROAD_DATUM, MIN_WATER_CM, MAX_WATER_CM, WATER_STEP_CM, surveyWaterLevel, relativeGroundLevel, waterDepth, inundatedArea } from './flood-math.mjs?v=rainbomb-078-zero-v1';
+import { ROAD_DATUM, MIN_WATER_CM, MAX_WATER_CM, WATER_STEP_CM, surveyWaterLevel, relativeGroundLevel, waterDepth, hasFloodWater, scenarioFloodArea } from './flood-math.mjs?v=rainbomb-078-dry-zero-v1';
 
 const $ = id => document.getElementById(id);
 const host = $('canvas-host');
@@ -269,38 +269,40 @@ function buildFloodLayer() {
 function setFloodEnabled(enabled) {
   floodEnabled = enabled && Boolean(floodMesh);
   $('flood-toggle').checked = floodEnabled;
-  if (floodMesh) floodMesh.visible = floodEnabled;
   $('flood-map-status').hidden = !floodEnabled;
   $('flood-off-note').hidden = floodEnabled;
   $('flood-panel').dataset.enabled = String(floodEnabled);
-  updateFloodPoint(); invalidate();
+  updateFlood();
 }
 
 function setWaterLevel(value) {
   waterCm = Math.max(MIN_WATER_CM, Math.min(MAX_WATER_CM, Math.round(value / WATER_STEP_CM) * WATER_STEP_CM));
   if (floodMesh) setFloodEnabled(true);
-  updateFlood();
+  else updateFlood();
 }
 
 function updateFlood() {
   const level = surveyWaterLevel(waterCm);
+  const hasWater = hasFloodWater(waterCm);
   $('flood-level').value = waterCm;
   $('flood-level').setAttribute('aria-valuetext', `${waterCm} เซนติเมตรเหนือระดับอ้างอิงถนนเทิดจักรี`);
   $('flood-level-value').textContent = `${waterCm} ซม.`;
-  $('flood-survey-level').textContent = `${signed(level)} ม.`;
-  $('flood-map-level').textContent = `Rain Bomb · น้ำ +${waterCm} ซม.`;
+  $('flood-survey-level').textContent = hasWater ? `${signed(level)} ม.` : '— ยังไม่เพิ่มน้ำ';
+  $('flood-map-level').textContent = hasWater ? `Rain Bomb · น้ำ +${waterCm} ซม.` : 'Rain Bomb · 0 ซม. ยังไม่ท่วม';
   $('flood-minus').disabled = waterCm <= MIN_WATER_CM;
   $('flood-plus').disabled = waterCm >= MAX_WATER_CM;
   document.querySelectorAll('[data-water-cm]').forEach(button => button.setAttribute('aria-pressed', String(Number(button.dataset.waterCm) === waterCm)));
   if (!floodMesh) return;
+  floodMesh.visible = floodEnabled && hasWater;
   floodMaterial.uniforms.surveyWater.value = level;
   floodMaterial.uniforms.displayWater.value = level + (meta.terrainDisplayOffsetMetres || 0);
-  if (!floodAreaCache.has(waterCm)) floodAreaCache.set(waterCm, inundatedArea(floodTriangles, level));
+  if (!floodAreaCache.has(waterCm)) floodAreaCache.set(waterCm, scenarioFloodArea(floodTriangles, waterCm));
   const area = floodAreaCache.get(waterCm);
   $('flood-area').textContent = format(area / 1600, 1);
   $('flood-percent').textContent = `${format(area / floodPlanArea * 100, 1)}% ของผิวโมเดลที่มีข้อมูล`;
   $('flood-area').dataset.squareMetres = area.toFixed(3);
-  $('flood-panel').dataset.surveyWater = level.toFixed(2);
+  $('flood-panel').dataset.surveyWater = hasWater ? level.toFixed(2) : '';
+  $('flood-panel').dataset.waterVisible = String(floodMesh.visible);
   updateFloodPoint(); invalidate();
 }
 
@@ -314,7 +316,7 @@ function updateFloodPoint() {
   $('flood-point-ground').textContent = `${signed(relativeGroundLevel(selectedPoint.elevation))} ม.`;
   $('flood-point-survey').textContent = `ระดับเดิม ${signed(selectedPoint.elevation)} ม.`;
   $('flood-point-depth').textContent = `${format(depth * 100, 1)} ซม.`;
-  $('flood-point-state').textContent = depth > 0.00001 ? 'พื้นดินต่ำกว่าผิวน้ำที่เลือก' : 'พื้นดินเท่ากับหรือสูงกว่าผิวน้ำที่เลือก';
+  $('flood-point-state').textContent = !hasFloodWater(waterCm) ? 'สถานะเริ่มต้น · ไม่มีน้ำท่วมขังจำลอง' : depth > 0.00001 ? 'พื้นดินต่ำกว่าผิวน้ำที่เลือก' : 'พื้นดินเท่ากับหรือสูงกว่าผิวน้ำที่เลือก';
   $('pin-title').textContent = floodEnabled ? 'พื้นดินเทียบถนนเทิดจักรี' : 'ระดับสำรวจบนผิวภูมิประเทศ';
   $('pin-height').textContent = `${signed(floodEnabled ? relativeGroundLevel(selectedPoint.elevation) : selectedPoint.elevation)} ม.`;
   $('pin-flood-depth').textContent = `ความลึกน้ำ ${format(depth * 100, 1)} ซม.`;
@@ -348,7 +350,7 @@ async function snapshot() {
       ctx.fillText(`RAIN BOMB | Water +${waterCm} cm above road datum | New 0.00 m = survey ${signed(ROAD_DATUM)} m`, 24, source.height + 56);
       ctx.fillStyle = '#8ddaf2'; ctx.fillRect(24, source.height + 73, 20, 17);
       ctx.fillStyle = '#326875'; ctx.font = '11px Arial';
-      ctx.fillText(`Area below water: ${format(floodAreaCache.get(waterCm) / 1600, 1)} rai | Water survey elevation ${signed(surveyWaterLevel(waterCm))} m`, 54, source.height + 86);
+      ctx.fillText(hasFloodWater(waterCm) ? `Area below water: ${format(floodAreaCache.get(waterCm) / 1600, 1)} rai | Water survey elevation ${signed(surveyWaterLevel(waterCm))} m` : 'Starting state: no simulated floodwater | Flooded area 0 rai | Depth 0 cm', 54, source.height + 86);
       ctx.fillText('Static water-level comparison. Includes existing low ponds/canals; data gaps excluded.', 24, source.height + 108);
       ctx.font = '10px Arial'; ctx.fillText(`Source: ${meta.source} | No rainfall, drainage or flow modelling.`, 24, source.height + 131);
     } else {

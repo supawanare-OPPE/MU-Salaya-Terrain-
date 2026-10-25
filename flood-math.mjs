@@ -4,6 +4,11 @@ export const MIN_WATER_CM = 0;
 export const MAX_WATER_CM = 150;
 export const WATER_STEP_CM = 10;
 
+// Zero is the user-defined dry starting state, not a water surface at the datum.
+export function hasFloodWater(centimetres) {
+  return centimetres > 0;
+}
+
 export function surveyWaterLevel(centimetres) {
   return ROAD_DATUM + centimetres / 100;
 }
@@ -13,7 +18,12 @@ export function relativeGroundLevel(surveyHeight) {
 }
 
 export function waterDepth(surveyHeight, centimetres) {
+  if (!hasFloodWater(centimetres)) return 0;
   return Math.max(0, surveyWaterLevel(centimetres) - surveyHeight);
+}
+
+export function scenarioFloodArea(triangles, centimetres) {
+  return hasFloodWater(centimetres) ? inundatedArea(triangles, surveyWaterLevel(centimetres)) : 0;
 }
 
 // Exact area fraction below a horizontal level on a linear TIN triangle.
