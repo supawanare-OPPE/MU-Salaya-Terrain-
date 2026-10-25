@@ -1,6 +1,6 @@
 // Heights here always use survey metres. Display translation/exaggeration is excluded.
 export const ROAD_DATUM = 0.78;
-export const MIN_WATER_CM = 10;
+export const MIN_WATER_CM = 0;
 export const MAX_WATER_CM = 150;
 export const WATER_STEP_CM = 10;
 
