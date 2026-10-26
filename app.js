@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
-import { createBenchmarkLayer } from './benchmark-layer.js?v=20261026-bm-v1';
+import { createBenchmarkLayer } from './benchmark-layer.js?v=20261026-bm-v2';
 import { ROAD_DATUM, MIN_WATER_CM, MAX_WATER_CM, WATER_STEP_CM, surveyWaterLevel, relativeGroundLevel, waterDepth, hasFloodWater, scenarioFloodArea } from './flood-math.mjs?v=rainbomb-078-dry-zero-v1';
 
 const $ = id => document.getElementById(id);

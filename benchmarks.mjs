@@ -39,14 +39,22 @@ export function layoutBenchmarkLabels(points, width, height, obstacles = []) {
   return points.map(point => {
     let best = null, bestScore = Infinity;
     const offsets = [[0, -30], [56, 0], [-56, 0], [0, 32], [56, -38], [-56, -38], [56, 38], [-56, 38], [0, -78], [0, 80], [100, 0], [-100, 0]];
-    for (const [dx, dy] of offsets) {
-      const x = Math.max(5, Math.min(width - MARKER_WIDTH - 5, point.x + dx - MARKER_WIDTH / 2));
-      const y = Math.max(5, Math.min(height - MARKER_HEIGHT - 5, point.y + dy - MARKER_HEIGHT / 2));
+    function consider(candidateX, candidateY) {
+      const x = Math.max(5, Math.min(width - MARKER_WIDTH - 5, candidateX));
+      const y = Math.max(5, Math.min(height - MARKER_HEIGHT - 5, candidateY));
       const box = { x, y, width: MARKER_WIDTH, height: MARKER_HEIGHT };
       const collisions = occupied.reduce((sum, other) => sum + overlapArea({ x: x - 3, y: y - 3, width: MARKER_WIDTH + 6, height: MARKER_HEIGHT + 6 }, other), 0);
       const distance = Math.hypot(x + MARKER_WIDTH / 2 - point.x, y + MARKER_HEIGHT / 2 - point.y);
       const score = collisions * 1000 + distance;
       if (score < bestScore) { best = box; bestScore = score; }
+    }
+    for (const [dx, dy] of offsets) consider(point.x + dx - MARKER_WIDTH / 2, point.y + dy - MARKER_HEIGHT / 2);
+    // Dense or panned views need more room than the nearby positions provide.
+    // Search free screen space before accepting any overlapping label.
+    if (bestScore >= 1000) {
+      for (let y = 5; y <= height - MARKER_HEIGHT - 5; y += 16) {
+        for (let x = 5; x <= width - MARKER_WIDTH - 5; x += 16) consider(x, y);
+      }
     }
     occupied.push(best);
     return { ...point, box: best };

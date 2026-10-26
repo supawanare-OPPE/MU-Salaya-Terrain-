@@ -1,4 +1,4 @@
-import { BENCHMARKS, BENCHMARK_SOURCE, benchmarkLocalPosition, layoutBenchmarkLabels, MARKER_WIDTH, MARKER_HEIGHT } from './benchmarks.mjs?v=20261026-bm-v1';
+import { BENCHMARKS, BENCHMARK_SOURCE, benchmarkLocalPosition, layoutBenchmarkLabels, MARKER_WIDTH, MARKER_HEIGHT } from './benchmarks.mjs?v=20261026-bm-v2';
 
 const symbol = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16M12 7v14M5 17l7-10 7 10"/></svg>';
 const signed = value => `${value < 0 ? '−' : '+'}${Math.abs(value).toFixed(3)}`;
