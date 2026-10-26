@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
+import { createBenchmarkLayer } from './benchmark-layer.js?v=20261026-bm-v1';
 import { ROAD_DATUM, MIN_WATER_CM, MAX_WATER_CM, WATER_STEP_CM, surveyWaterLevel, relativeGroundLevel, waterDepth, hasFloodWater, scenarioFloodArea } from './flood-math.mjs?v=rainbomb-078-dry-zero-v1';
 
 const $ = id => document.getElementById(id);
@@ -13,6 +14,7 @@ const MODEL_VERSION = '20261021-03-3f4b03e5';
 let campus, basemap, buildingOutlines, waterEdges, needsRender = true;
 let floodMesh, floodMaterial, floodTriangles, floodPlanArea = 0, floodEnabled = false, floodVisited = false;
 let waterCm = MIN_WATER_CM, activePanel = 'explore';
+let benchmarkLayer;
 const floodAreaCache = new Map();
 function invalidate() { needsRender = true; }
 for (const event of ['click', 'input', 'change']) document.addEventListener(event, invalidate);
@@ -28,7 +30,7 @@ function toast(message) {
 function setPanel(name) {
   activePanel = name;
   $('sidebar').classList.toggle('flood-panel-active', name === 'flood');
-  for (const key of ['explore', 'flood', 'colors']) {
+  for (const key of ['explore', 'flood', 'benchmarks', 'colors']) {
     const active = key === name;
     $(`tab-${key}`).setAttribute('aria-selected', String(active));
     $(`tab-${key}`).tabIndex = active ? 0 : -1;
@@ -38,7 +40,7 @@ function setPanel(name) {
     floodVisited = true; setFloodEnabled(true);
   }
 }
-const panelNames = ['explore', 'flood', 'colors'];
+const panelNames = ['explore', 'flood', 'benchmarks', 'colors'];
 for (const name of panelNames) {
   $(`tab-${name}`).onclick = () => setPanel(name);
   $(`tab-${name}`).onkeydown = event => {
@@ -343,6 +345,7 @@ async function snapshot() {
     const source = renderer.domElement; const output = document.createElement('canvas');
     output.width = source.width; output.height = source.height + 145;
     const ctx = output.getContext('2d'); ctx.fillStyle = '#fafbf6'; ctx.fillRect(0, 0, output.width, output.height); ctx.drawImage(source, 0, 0);
+    benchmarkLayer?.draw(ctx, source.width / host.clientWidth);
     ctx.fillStyle = '#183e34'; ctx.font = '19px Arial'; ctx.fillText(`MAHIDOL SALAYA · TERRAIN EXPLORER | ${mode === 'top' ? 'Top view' : '3D view'} | Vertical display x${exag}`, 24, source.height + 31);
     ctx.font = '12px Arial'; ctx.fillStyle = '#6a7e5b';
     const width = output.width - 48;
@@ -406,6 +409,13 @@ async function initialize() {
     marker = new THREE.Mesh(new THREE.RingGeometry(0.7, 1.1, 24), new THREE.MeshBasicMaterial({ color: '#183e34', side: THREE.DoubleSide, depthTest: false }));
     marker.renderOrder = 20; marker.visible = false; scene.add(marker);
     buildFloodLayer(); setExaggeration(exag); buildLegend(); setView('3d');
+    benchmarkLayer = createBenchmarkLayer({ THREE, model, camera, controls, host, metadata: meta, roadDatum: ROAD_DATUM, invalidate, onSelect: () => {
+      setPanel('benchmarks'); $('sidebar').scrollTop = 0;
+      if (matchMedia('(max-width: 760px)').matches) {
+        $('sidebar').classList.add('mobile-open'); $('mobile-panel-toggle').setAttribute('aria-expanded', 'true');
+        $('benchmark-detail').scrollIntoView({ behavior: 'instant', block: 'center' });
+      }
+    } });
     $('loading').hidden = true; $('progress-fill').style.width = '100%';
     $('glb-size').textContent = `ผิวภูมิประเทศ เส้นอ้างอิง และบริเวณตรวจสอบ · ${format(meta.terrainGlbBytes / 1e6, 1)} MB`;
     $('context-status').textContent = 'กำลังโหลดอาคารและภาพแผนที่…';
@@ -423,7 +433,7 @@ async function initialize() {
     function animate() {
       raf = requestAnimationFrame(animate); controls.update();
       if (!needsRender) return;
-      needsRender = false; updatePin();
+      needsRender = false; updatePin(); benchmarkLayer?.update();
       const north = controls.target.clone().add(new THREE.Vector3(0, 0, -200)).project(camera);
       const origin = controls.target.clone().project(camera);
       const angle = Math.atan2((north.x - origin.x) * host.clientWidth, (north.y - origin.y) * host.clientHeight) * 180 / Math.PI;
