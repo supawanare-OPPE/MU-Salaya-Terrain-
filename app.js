@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import { createBuildingLabels } from './building-labels.js?v=20261102-names-1';
-import { createSurveyLayer } from './survey-layer.js?v=20261102-names-1';
+import { createBuildingLabels } from './building-labels.js?v=20261102-lake-2';
+import { createSurveyLayer } from './survey-layer.js?v=20261102-lake-2';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { createBenchmarkLayer } from './benchmark-layer.js?v=20261026-bm-v2';

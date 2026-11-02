@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 export async function createBuildingLabels({model,camera,controls,host,invalidate}) {
- const response=await fetch('./building-names.json?v=20261102-names-1');if(!response.ok)throw new Error('Building labels unavailable');
+ const response=await fetch('./building-names.json?v=20261102-lake-2');if(!response.ok)throw new Error('Building labels unavailable');
  const data=await response.json(),$=id=>document.getElementById(id),ns='http://www.w3.org/2000/svg';
  const overlay=document.createElement('div');overlay.id='building-label-overlay';overlay.className='building-label-overlay';overlay.setAttribute('role','group');overlay.setAttribute('aria-label','ชื่ออาคารและสถานที่จาก CAD');host.parentElement.insertBefore(overlay,$('benchmark-overlay'));
  const svg=document.createElementNS(ns,'svg');svg.classList.add('building-leaders');overlay.append(svg);
