@@ -37,7 +37,7 @@ export async function createSurveyLayer({model,camera,host,metadata,invalidate})
     ctx.clearRect(0,0,canvas.width,canvas.height);placements=[];
     const enabled={contour:$('contour-label-toggle').checked,spot:$('spot-level-toggle').checked};
     const rect=host.getBoundingClientRect();
-    const boxes=[...document.querySelectorAll('.bm-marker,.map-heading,.view-switch,.compass,.map-tools,.map-bottom,#flood-map-status,#pin-label')].filter(e=>!e.hidden&&e.getClientRects().length).map(e=>{const r=e.getBoundingClientRect();return{x:r.left-rect.left-4,y:r.top-rect.top-4,w:r.width+8,h:r.height+8};});
+    const boxes=[...document.querySelectorAll('.bm-marker,.building-name-marker,.map-heading,.view-switch,.compass,.map-tools,.map-bottom,#flood-map-status,#pin-label')].filter(e=>!e.hidden&&e.getClientRects().length).map(e=>{const r=e.getBoundingClientRect();return{x:r.left-rect.left-4,y:r.top-rect.top-4,w:r.width+8,h:r.height+8};});
     model.updateMatrixWorld(true);camera.updateMatrixWorld();
     for(const kind of ['contour','spot']) {
       if(!enabled[kind])continue;

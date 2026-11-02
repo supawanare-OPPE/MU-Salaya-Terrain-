@@ -1,0 +1,1603 @@
+{
+  "source": "Topo64179-3_contours_SH_ELEV_BD_TK_EA_name.dwg",
+  "layer": "BD. name",
+  "labels": [
+    {
+      "id": "C34DA",
+      "name": "อาคารเรียนคณะ วิทยาศาสตร์ 1-2",
+      "lines": [
+        "อาคารเรียนคณะ",
+        "วิทยาศาสตร์ 1-2"
+      ],
+      "kind": "building",
+      "easting": 643052.6935640452,
+      "northing": 1525154.5617424399,
+      "x": 177.39876404521056,
+      "z": 139.55635756021366,
+      "sourceHandles": [
+        "C34DA",
+        "C34DB"
+      ],
+      "groundY": 7.375609912884126,
+      "campusY": 33.04302040473136,
+      "y": 33.39302040473136,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C34DC",
+      "name": "อาคารเรียนคณะ วิทยาศาสตร์ 3-4",
+      "lines": [
+        "อาคารเรียนคณะ",
+        "วิทยาศาสตร์ 3-4"
+      ],
+      "kind": "building",
+      "easting": 642936.9713420493,
+      "northing": 1525161.6244267654,
+      "x": 61.67654204927385,
+      "z": 132.49367323471233,
+      "sourceHandles": [
+        "C34DC",
+        "C34DD"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": 34.68497358400786,
+      "y": 35.03497358400786,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3542",
+      "name": "อาคาร คณะวิศวกรรมศาสตร์ 3",
+      "lines": [
+        "อาคาร",
+        "คณะวิศวกรรมศาสตร์ 3"
+      ],
+      "kind": "building",
+      "easting": 643328.3479290915,
+      "northing": 1525517.0083529726,
+      "x": 453.0531290915096,
+      "z": -222.89025297248736,
+      "sourceHandles": [
+        "C3542",
+        "C3541"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": null,
+      "y": 7.851096134899991,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3544",
+      "name": "อาคาร คณะวิศวกรรมศาสตร์ 1",
+      "lines": [
+        "อาคาร",
+        "คณะวิศวกรรมศาสตร์ 1"
+      ],
+      "kind": "building",
+      "easting": 643215.4345543039,
+      "northing": 1525562.94512877,
+      "x": 340.13975430384744,
+      "z": -268.82702876999974,
+      "sourceHandles": [
+        "C3544",
+        "C3543"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 31.172332763671875,
+      "y": 31.522332763671876,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3546",
+      "name": "อาคาร คณะวิศวกรรมศาสตร์ 2",
+      "lines": [
+        "อาคาร",
+        "คณะวิศวกรรมศาสตร์ 2"
+      ],
+      "kind": "building",
+      "easting": 643074.926225263,
+      "northing": 1525542.927912049,
+      "x": 199.6314252630109,
+      "z": -248.80981204891577,
+      "sourceHandles": [
+        "C3546",
+        "C3545"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 18.352331161499023,
+      "y": 18.702331161499025,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3549",
+      "name": "คณะสังคมศาสตร์และ มนุษยศาสตร์",
+      "lines": [
+        "คณะสังคมศาสตร์และ",
+        "มนุษยศาสตร์"
+      ],
+      "kind": "building",
+      "easting": 643209.5345583488,
+      "northing": 1525187.0522808596,
+      "x": 334.23975834879093,
+      "z": 107.06581914052367,
+      "sourceHandles": [
+        "C3549",
+        "C3548"
+      ],
+      "groundY": 7.4551323198047985,
+      "campusY": 21.94094008188745,
+      "y": 22.290940081887452,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C354B",
+      "name": "หอสมุดและคลังความรู้ มหาวิทยาลัยมหิดล",
+      "lines": [
+        "หอสมุดและคลังความรู้",
+        "มหาวิทยาลัยมหิดล"
+      ],
+      "kind": "building",
+      "easting": 643137.5647342901,
+      "northing": 1525400.369187692,
+      "x": 262.2699342900887,
+      "z": -106.25108769186772,
+      "sourceHandles": [
+        "C354B",
+        "C354A"
+      ],
+      "groundY": 7.554315614584829,
+      "campusY": 23.84233283996582,
+      "y": 24.19233283996582,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C354D",
+      "name": "อาคาร บรรยายรวม 1",
+      "lines": [
+        "อาคาร",
+        "บรรยายรวม 1"
+      ],
+      "kind": "building",
+      "easting": 643210.312158929,
+      "northing": 1525310.1237769155,
+      "x": 335.01735892891884,
+      "z": -16.005676915403455,
+      "sourceHandles": [
+        "C354D",
+        "C354C"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 18.77233123779297,
+      "y": 19.12233123779297,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3571",
+      "name": "คณะสิ่งแวดล้อมและ ทรัพยากรศาสตร์",
+      "lines": [
+        "คณะสิ่งแวดล้อมและ",
+        "ทรัพยากรศาสตร์"
+      ],
+      "kind": "building",
+      "easting": 642944.437768964,
+      "northing": 1525435.0413976295,
+      "x": 69.14296896394808,
+      "z": -140.92329762945883,
+      "sourceHandles": [
+        "C3571",
+        "C3572"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": null,
+      "y": 7.351096134899991,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3575",
+      "name": "อาคาร บรรยายรวม 2",
+      "lines": [
+        "อาคาร",
+        "บรรยายรวม 2"
+      ],
+      "kind": "building",
+      "easting": 643040.3836360618,
+      "northing": 1525311.06098699,
+      "x": 165.08883606176823,
+      "z": -16.942886990029365,
+      "sourceHandles": [
+        "C3575",
+        "C3574"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 21.16233253479004,
+      "y": 21.51233253479004,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C357C",
+      "name": "วิทยาลัยวิทยาศาสตร์ และเทคโนโลยีการกีฬา",
+      "lines": [
+        "วิทยาลัยวิทยาศาสตร์",
+        "และเทคโนโลยีการกีฬา"
+      ],
+      "kind": "building",
+      "easting": 642824.68748515,
+      "northing": 1525551.9691914232,
+      "x": -50.60731485008728,
+      "z": -257.8510914230719,
+      "sourceHandles": [
+        "C357C",
+        "C357D"
+      ],
+      "groundY": 6.791690107037534,
+      "campusY": 22.356005160550865,
+      "y": 22.706005160550866,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C35D6",
+      "name": "สถาบันวิจัยภาษาและ วัฒนธรรมเอเชีย",
+      "lines": [
+        "สถาบันวิจัยภาษาและ",
+        "วัฒนธรรมเอเชีย"
+      ],
+      "kind": "building",
+      "easting": 643037.7354372344,
+      "northing": 1525028.282462445,
+      "x": 162.44063723436557,
+      "z": 265.835637554992,
+      "sourceHandles": [
+        "C35D6",
+        "C35D5"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": null,
+      "y": 7.351096134899991,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A2C",
+      "name": "สถาบันราชสุดา คณะแพทยศาสตร์โรงพยาบาลรามาธิบดี",
+      "lines": [
+        "สถาบันราชสุดา",
+        "คณะแพทยศาสตร์โรงพยาบาลรามาธิบดี"
+      ],
+      "kind": "building",
+      "easting": 643303.6549046813,
+      "northing": 1524550.8919922034,
+      "x": 428.3601046812255,
+      "z": 743.2261077966541,
+      "sourceHandles": [
+        "C3A2C",
+        "C3A2D"
+      ],
+      "groundY": 8.001096134899992,
+      "campusY": 20.62295856297326,
+      "y": 20.97295856297326,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A35",
+      "name": "อาคารศาลายา (กองกายภาพและสิ่งแวดล้อม)",
+      "lines": [
+        "อาคารศาลายา",
+        "(กองกายภาพและสิ่งแวดล้อม)"
+      ],
+      "kind": "building",
+      "easting": 642890.027813026,
+      "northing": 1525795.1638861655,
+      "x": 14.73301302595064,
+      "z": -501.0457861653995,
+      "sourceHandles": [
+        "C3A35",
+        "C3A37"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 13.522332191467285,
+      "y": 13.872332191467285,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C34E0",
+      "name": "ลานมหิดล",
+      "lines": [
+        "ลานมหิดล"
+      ],
+      "kind": "place",
+      "easting": 643136.6470604821,
+      "northing": 1525188.820917483,
+      "x": 261.35226048203185,
+      "z": 105.2971825171262,
+      "sourceHandles": [
+        "C34E0"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": null,
+      "y": 7.351096134899991,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C34F4",
+      "name": "MU Lake",
+      "lines": [
+        "MU Lake"
+      ],
+      "kind": "place",
+      "easting": 642497.3121,
+      "northing": 1525315.249508853,
+      "x": -377.9827000000514,
+      "z": -21.131408852990717,
+      "sourceHandles": [
+        "C34F4"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 8.422331809997559,
+      "y": 8.772331809997558,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C350F",
+      "name": "อุทยานธรรมชาติวิทยาสีรีรุกขชาติ",
+      "lines": [
+        "อุทยานธรรมชาติวิทยาสีรีรุกขชาติ"
+      ],
+      "kind": "place",
+      "easting": 642541.2198556926,
+      "northing": 1524878.246043996,
+      "x": -334.07494430744555,
+      "z": 415.8720560041256,
+      "sourceHandles": [
+        "C350F"
+      ],
+      "groundY": 2.2040202077428357,
+      "campusY": null,
+      "y": 6.351096134899991,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3540",
+      "name": "วิทยาลัยนานาชาติ",
+      "lines": [
+        "วิทยาลัยนานาชาติ"
+      ],
+      "kind": "building",
+      "easting": 643336.8598232229,
+      "northing": 1525208.842847487,
+      "x": 461.56502322282176,
+      "z": 85.27525251312181,
+      "sourceHandles": [
+        "C3540"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 29.142332077026367,
+      "y": 29.49233207702637,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C354E",
+      "name": "คณะ ICT",
+      "lines": [
+        "คณะ ICT"
+      ],
+      "kind": "building",
+      "easting": 643181.4412522108,
+      "northing": 1525383.529578054,
+      "x": 306.14645221072715,
+      "z": -89.41147805401124,
+      "sourceHandles": [
+        "C354E"
+      ],
+      "groundY": 7.505689909391421,
+      "campusY": 28.012331008911133,
+      "y": 28.362331008911134,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3570",
+      "name": "สถาบันโภชนาการ",
+      "lines": [
+        "สถาบันโภชนาการ"
+      ],
+      "kind": "building",
+      "easting": 642939.9506945692,
+      "northing": 1525571.812626813,
+      "x": 64.6558945691213,
+      "z": -277.694526812993,
+      "sourceHandles": [
+        "C3570"
+      ],
+      "groundY": 6.715223543345996,
+      "campusY": 34.56233215332031,
+      "y": 34.912332153320314,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3573",
+      "name": "บัณฑิตวิทยาลัย",
+      "lines": [
+        "บัณฑิตวิทยาลัย"
+      ],
+      "kind": "building",
+      "easting": 642929.0438001936,
+      "northing": 1525313.408454212,
+      "x": 53.74900019355118,
+      "z": -19.2903542118147,
+      "sourceHandles": [
+        "C3573"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 26.071204375926335,
+      "y": 26.421204375926337,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C357E",
+      "name": "ศูนย์การเรียนรู้มหิดล",
+      "lines": [
+        "ศูนย์การเรียนรู้มหิดล"
+      ],
+      "kind": "building",
+      "easting": 642815.4007489429,
+      "northing": 1525346.626560902,
+      "x": -59.894051057170145,
+      "z": -52.50846090191044,
+      "sourceHandles": [
+        "C357E"
+      ],
+      "groundY": 7.016877426679294,
+      "campusY": 33.08162241294664,
+      "y": 33.431622412946645,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C357F",
+      "name": "อาคารสิ่งแวดล้อมพัฒนดล",
+      "lines": [
+        "อาคารสิ่งแวดล้อมพัฒนดล"
+      ],
+      "kind": "building",
+      "easting": 642821.8290992031,
+      "northing": 1525416.782711558,
+      "x": -53.46570079692174,
+      "z": -122.66461155796424,
+      "sourceHandles": [
+        "C357F"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 40.552330017089844,
+      "y": 40.902330017089845,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3594",
+      "name": "บ้านลีลาวดี (หอ 10 )",
+      "lines": [
+        "บ้านลีลาวดี (หอ 10 )"
+      ],
+      "kind": "building",
+      "easting": 642688.4412144802,
+      "northing": 1525387.987246387,
+      "x": -186.8535855198279,
+      "z": -93.86914638685994,
+      "sourceHandles": [
+        "C3594"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 32.22024298515442,
+      "y": 32.57024298515442,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3595",
+      "name": "โรงพละอเนกประสงค์ (โรงช้าง)",
+      "lines": [
+        "โรงพละอเนกประสงค์",
+        "(โรงช้าง)"
+      ],
+      "kind": "building",
+      "easting": 642597.6089358989,
+      "northing": 1525358.519687952,
+      "x": -277.68586410116404,
+      "z": -64.40158795192838,
+      "sourceHandles": [
+        "C3595"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 23.050284495288405,
+      "y": 23.400284495288407,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3596",
+      "name": "บ้านศรีตรัง (หอ 11)",
+      "lines": [
+        "บ้านศรีตรัง (หอ 11)"
+      ],
+      "kind": "building",
+      "easting": 642667.388318011,
+      "northing": 1525446.517665046,
+      "x": -207.9064819890773,
+      "z": -152.39956504595466,
+      "sourceHandles": [
+        "C3596"
+      ],
+      "groundY": 6.815992978819901,
+      "campusY": 41.96233367919922,
+      "y": 42.31233367919922,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C359E",
+      "name": "มหิดลสิทธาคาร",
+      "lines": [
+        "มหิดลสิทธาคาร"
+      ],
+      "kind": "building",
+      "easting": 642812.5725499969,
+      "northing": 1524836.685451486,
+      "x": -62.72225000313483,
+      "z": 457.4326485141646,
+      "sourceHandles": [
+        "C359E"
+      ],
+      "groundY": 12.12600974667942,
+      "campusY": 39.779355973370684,
+      "y": 40.129355973370686,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C35A3",
+      "name": "อาคารจอดรถ มหิดลสิทธาคาร",
+      "lines": [
+        "อาคารจอดรถ",
+        "มหิดลสิทธาคาร"
+      ],
+      "kind": "building",
+      "easting": 642903.2399943607,
+      "northing": 1525012.899513229,
+      "x": 27.945194360683672,
+      "z": 281.21858677105047,
+      "sourceHandles": [
+        "C35A3"
+      ],
+      "groundY": 8.001096134899992,
+      "campusY": null,
+      "y": 8.351096134899992,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C35B3",
+      "name": "อาคารอทิตยาธร",
+      "lines": [
+        "อาคารอทิตยาธร"
+      ],
+      "kind": "building",
+      "easting": 643384.7267273925,
+      "northing": 1524954.01611714,
+      "x": 509.43192739249207,
+      "z": 340.10198286012746,
+      "sourceHandles": [
+        "C35B3"
+      ],
+      "groundY": 9.757320351271764,
+      "campusY": 32.262332916259766,
+      "y": 32.61233291625977,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C35B5",
+      "name": "สถาบันพัฒนา สุขภาพอาเซียน",
+      "lines": [
+        "สถาบันพัฒนา",
+        "สุขภาพอาเซียน"
+      ],
+      "kind": "building",
+      "easting": 643302.8999284011,
+      "northing": 1525018.958224138,
+      "x": 427.6051284010755,
+      "z": 275.15987586206757,
+      "sourceHandles": [
+        "C35B5"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 20.652332305908203,
+      "y": 21.002332305908205,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C35B6",
+      "name": "หอประชุม ณัฐภมรประวัติ",
+      "lines": [
+        "หอประชุม",
+        "ณัฐภมรประวัติ"
+      ],
+      "kind": "building",
+      "easting": 643233.059086873,
+      "northing": 1525069.262572562,
+      "x": 357.7642868729308,
+      "z": 224.85552743799053,
+      "sourceHandles": [
+        "C35B6"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 15.405374709913144,
+      "y": 15.755374709913143,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C35B7",
+      "name": "โรงเรียนเตรียมอุดมดนตรี",
+      "lines": [
+        "โรงเรียนเตรียมอุดมดนตรี"
+      ],
+      "kind": "building",
+      "easting": 643273.0775291965,
+      "northing": 1524916.661050989,
+      "x": 397.7827291964786,
+      "z": 377.45704901102,
+      "sourceHandles": [
+        "C35B7"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": null,
+      "y": 7.851096134899991,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C35D4",
+      "name": "วิทยาลัยดุริยางคศิลป์",
+      "lines": [
+        "วิทยาลัยดุริยางคศิลป์"
+      ],
+      "kind": "building",
+      "easting": 643024.4024137012,
+      "northing": 1524752.297740749,
+      "x": 149.1076137011405,
+      "z": 541.8203592509963,
+      "sourceHandles": [
+        "C35D4"
+      ],
+      "groundY": 9.148933341957484,
+      "campusY": 30.052331924438477,
+      "y": 30.402331924438478,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C35D7",
+      "name": "สถาบันนวัตกรรม การเรียนรู้",
+      "lines": [
+        "สถาบันนวัตกรรม",
+        "การเรียนรู้"
+      ],
+      "kind": "building",
+      "easting": 643120.5523089828,
+      "northing": 1525064.466848255,
+      "x": 245.25750898278784,
+      "z": 229.65125174517743,
+      "sourceHandles": [
+        "C35D7"
+      ],
+      "groundY": 7.324763084939108,
+      "campusY": 21.352331161499023,
+      "y": 21.702331161499025,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C35D8",
+      "name": "มิวเซียมอุษาคเนย์",
+      "lines": [
+        "มิวเซียมอุษาคเนย์"
+      ],
+      "kind": "building",
+      "easting": 643037.7055448733,
+      "northing": 1524937.72489245,
+      "x": 162.41074487322476,
+      "z": 356.3932075500488,
+      "sourceHandles": [
+        "C35D8"
+      ],
+      "groundY": 6.734426635782553,
+      "campusY": 40.482330322265625,
+      "y": 40.832330322265626,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3651",
+      "name": "วิทยาลัยศาสนศึกษา",
+      "lines": [
+        "วิทยาลัยศาสนศึกษา"
+      ],
+      "kind": "building",
+      "easting": 642534.8793186053,
+      "northing": 1525834.292257665,
+      "x": -340.4154813947389,
+      "z": -540.1741576648783,
+      "sourceHandles": [
+        "C3651"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": 20.086160693792415,
+      "y": 20.436160693792417,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3652",
+      "name": "สถาบันแห่งชาติเพื่อการ พัฒนาเด็กและครอบครัว",
+      "lines": [
+        "สถาบันแห่งชาติเพื่อการ",
+        "พัฒนาเด็กและครอบครัว"
+      ],
+      "kind": "building",
+      "easting": 642640.0236418674,
+      "northing": 1525808.172781924,
+      "x": -235.2711581325857,
+      "z": -514.0546819239389,
+      "sourceHandles": [
+        "C3652"
+      ],
+      "groundY": 7.625337580191124,
+      "campusY": 27.762331008911133,
+      "y": 28.112331008911134,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3653",
+      "name": "อาคารสิริวิทยา",
+      "lines": [
+        "อาคารสิริวิทยา"
+      ],
+      "kind": "building",
+      "easting": 642815.2355782585,
+      "northing": 1525729.959930537,
+      "x": -60.059221741510555,
+      "z": -435.84183053695597,
+      "sourceHandles": [
+        "C3653"
+      ],
+      "groundY": 7.457903345648874,
+      "campusY": 26.79233169555664,
+      "y": 27.142331695556642,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3671",
+      "name": "ศูนย์สัตว์ทดลองแห่งชาติ",
+      "lines": [
+        "ศูนย์สัตว์ทดลองแห่งชาติ"
+      ],
+      "kind": "building",
+      "easting": 642423.4565136052,
+      "northing": 1525917.635038794,
+      "x": -451.83828639483545,
+      "z": -623.5169387939386,
+      "sourceHandles": [
+        "C3671"
+      ],
+      "groundY": 7.312352649868149,
+      "campusY": 19.902332305908203,
+      "y": 20.252332305908205,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3672",
+      "name": "คณะสัตวแพทยศาสตร์",
+      "lines": [
+        "คณะสัตวแพทยศาสตร์"
+      ],
+      "kind": "building",
+      "easting": 642377.7942920862,
+      "northing": 1525792.696095912,
+      "x": -497.5005079138791,
+      "z": -498.57799591193907,
+      "sourceHandles": [
+        "C3672"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": 40.352333068847656,
+      "y": 40.70233306884766,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3673",
+      "name": "สถานีไฟฟ้าย่อย",
+      "lines": [
+        "สถานีไฟฟ้าย่อย"
+      ],
+      "kind": "building",
+      "easting": 642440.8865080021,
+      "northing": 1526097.434774275,
+      "x": -434.4082919979701,
+      "z": -803.3166742748581,
+      "sourceHandles": [
+        "C3673"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": 16.222332000732422,
+      "y": 16.572332000732423,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3674",
+      "name": "กายวิทยาทาน",
+      "lines": [
+        "กายวิทยาทาน"
+      ],
+      "kind": "building",
+      "easting": 642448.6957787459,
+      "northing": 1526063.75339873,
+      "x": -426.59902125410736,
+      "z": -769.6352987298742,
+      "sourceHandles": [
+        "C3674"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": 16.222332000732422,
+      "y": 16.572332000732423,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3686",
+      "name": "สำนักงานอธิการบดี",
+      "lines": [
+        "สำนักงานอธิการบดี"
+      ],
+      "kind": "building",
+      "easting": 643280.6553071165,
+      "northing": 1525385.736418483,
+      "x": 405.3605071164202,
+      "z": -91.61831848300062,
+      "sourceHandles": [
+        "C3686"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": 31.63233184814453,
+      "y": 31.982331848144533,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3687",
+      "name": "อาคารอเนกประสงค์",
+      "lines": [
+        "อาคารอเนกประสงค์"
+      ],
+      "kind": "building",
+      "easting": 642682.979821518,
+      "northing": 1525577.445292044,
+      "x": -192.31497848208528,
+      "z": -283.3271920438856,
+      "sourceHandles": [
+        "C3687"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 18.122331619262695,
+      "y": 18.472331619262697,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A27",
+      "name": "ศูนย์การแพทย์กาญจนาภิเษก",
+      "lines": [
+        "ศูนย์การแพทย์กาญจนาภิเษก"
+      ],
+      "kind": "building",
+      "easting": 642827.2347774435,
+      "northing": 1524500.386448974,
+      "x": -48.06002255657222,
+      "z": 793.7316510260571,
+      "sourceHandles": [
+        "C3A27"
+      ],
+      "groundY": 6.501096134899991,
+      "campusY": 25.600000381469727,
+      "y": 25.950000381469728,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A28",
+      "name": "อาคารจอดรถ",
+      "lines": [
+        "อาคารจอดรถ"
+      ],
+      "kind": "building",
+      "easting": 643046.132113659,
+      "northing": 1524488.379773562,
+      "x": 170.8373136590235,
+      "z": 805.7383264380042,
+      "sourceHandles": [
+        "C3A28"
+      ],
+      "groundY": 8.001096134899992,
+      "campusY": 31.922332763671875,
+      "y": 32.272332763671876,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A2E",
+      "name": "คณะพยาบาลศาสตร์",
+      "lines": [
+        "คณะพยาบาลศาสตร์"
+      ],
+      "kind": "building",
+      "easting": 643349.6252862011,
+      "northing": 1524772.778642288,
+      "x": 474.3304862010991,
+      "z": 521.3394577121362,
+      "sourceHandles": [
+        "C3A2E"
+      ],
+      "groundY": 11.184243406531117,
+      "campusY": null,
+      "y": 11.534243406531116,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A2F",
+      "name": "วิทยาลัยดุริยางคศิลป์",
+      "lines": [
+        "วิทยาลัยดุริยางคศิลป์"
+      ],
+      "kind": "building",
+      "easting": 643151.165235303,
+      "northing": 1524739.531839166,
+      "x": 275.8704353029607,
+      "z": 554.5862608340103,
+      "sourceHandles": [
+        "C3A2F"
+      ],
+      "groundY": 9.409189892674314,
+      "campusY": 32.162330627441406,
+      "y": 32.51233062744141,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A30",
+      "name": "หอ 8-9",
+      "lines": [
+        "หอ 8-9"
+      ],
+      "kind": "building",
+      "easting": 642630.060296836,
+      "northing": 1525160.312357029,
+      "x": -245.23450316407252,
+      "z": 133.80574297113344,
+      "sourceHandles": [
+        "C3A30"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 27.82233238220215,
+      "y": 28.17233238220215,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A31",
+      "name": "หอ 6-7",
+      "lines": [
+        "หอ 6-7"
+      ],
+      "kind": "building",
+      "easting": 642676.9232987391,
+      "northing": 1525193.494812536,
+      "x": -198.37150126090273,
+      "z": 100.62328746402636,
+      "sourceHandles": [
+        "C3A31"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 27.82233238220215,
+      "y": 28.17233238220215,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A32",
+      "name": "หอ 3-4",
+      "lines": [
+        "หอ 3-4"
+      ],
+      "kind": "building",
+      "easting": 642676.5579547875,
+      "northing": 1525253.584221973,
+      "x": -198.7368452125229,
+      "z": 40.53387802699581,
+      "sourceHandles": [
+        "C3A32"
+      ],
+      "groundY": 7.6029285044534225,
+      "campusY": 27.82233238220215,
+      "y": 28.17233238220215,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A33",
+      "name": "หอ 1-2",
+      "lines": [
+        "หอ 1-2"
+      ],
+      "kind": "building",
+      "easting": 642679.4794067967,
+      "northing": 1525311.407233997,
+      "x": -195.81539320328739,
+      "z": -17.28913399693556,
+      "sourceHandles": [
+        "C3A33"
+      ],
+      "groundY": 7.949578241925064,
+      "campusY": 27.82233238220215,
+      "y": 28.17233238220215,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A34",
+      "name": "อาคารชุดพักอาศัย",
+      "lines": [
+        "อาคารชุดพักอาศัย"
+      ],
+      "kind": "building",
+      "easting": 642810.0908819392,
+      "northing": 1525982.674190625,
+      "x": -65.20391806086991,
+      "z": -688.556090625003,
+      "sourceHandles": [
+        "C3A34"
+      ],
+      "groundY": 7.827592095204029,
+      "campusY": 52.322330474853516,
+      "y": 52.67233047485352,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A36",
+      "name": "คณะกายภาพบำบัด",
+      "lines": [
+        "คณะกายภาพบำบัด"
+      ],
+      "kind": "building",
+      "easting": 642911.5263717378,
+      "northing": 1525731.911710196,
+      "x": 36.231571737793274,
+      "z": -437.79361019586213,
+      "sourceHandles": [
+        "C3A36"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 23.282331466674805,
+      "y": 23.632331466674806,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A38",
+      "name": "คณะเทคนิคการแพทย์",
+      "lines": [
+        "คณะเทคนิคการแพทย์"
+      ],
+      "kind": "building",
+      "easting": 643022.9586212547,
+      "northing": 1525844.337846139,
+      "x": 147.66382125462405,
+      "z": -550.2197461389005,
+      "sourceHandles": [
+        "C3A38"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": 43.822330474853516,
+      "y": 44.17233047485352,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A39",
+      "name": "โรงเรียนพยาบาลรามาฯ",
+      "lines": [
+        "โรงเรียนพยาบาลรามาฯ"
+      ],
+      "kind": "building",
+      "easting": 642913.7552164306,
+      "northing": 1525844.765937724,
+      "x": 38.46041643060744,
+      "z": -550.6478377238382,
+      "sourceHandles": [
+        "C3A39"
+      ],
+      "groundY": 7.269854818248578,
+      "campusY": 37.71233367919922,
+      "y": 38.06233367919922,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A3A",
+      "name": "หอพักนักศึกษา โรงพยาบาลรามาฯ",
+      "lines": [
+        "หอพักนักศึกษา",
+        "โรงพยาบาลรามาฯ"
+      ],
+      "kind": "building",
+      "easting": 642803.9017638963,
+      "northing": 1525852.861660227,
+      "x": -71.39303610369097,
+      "z": -558.743560226867,
+      "sourceHandles": [
+        "C3A3A"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 33.10627150438847,
+      "y": 33.45627150438847,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A3B",
+      "name": "MUIDS",
+      "lines": [
+        "MUIDS"
+      ],
+      "kind": "building",
+      "easting": 643033.3872926396,
+      "northing": 1525962.51654748,
+      "x": 158.0924926395528,
+      "z": -668.3984474798199,
+      "sourceHandles": [
+        "C3A3B"
+      ],
+      "groundY": 8.294817836514914,
+      "campusY": 31.942331314086914,
+      "y": 32.292331314086915,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A3C",
+      "name": "สถาบันชีววิทยาศาสตร์โมเลกุล",
+      "lines": [
+        "สถาบันชีววิทยาศาสตร์โมเลกุล"
+      ],
+      "kind": "building",
+      "easting": 643371.056598526,
+      "northing": 1525740.783395341,
+      "x": 495.7617985259276,
+      "z": -446.6652953408193,
+      "sourceHandles": [
+        "C3A3C"
+      ],
+      "groundY": 7.485530632780963,
+      "campusY": 24.77423095703125,
+      "y": 25.12423095703125,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A3D",
+      "name": "ศูนย์วิจัยและพัฒนาวัคซีน",
+      "lines": [
+        "ศูนย์วิจัยและพัฒนาวัคซีน"
+      ],
+      "kind": "building",
+      "easting": 643281.0203584534,
+      "northing": 1525692.457430108,
+      "x": 405.7255584533559,
+      "z": -398.33933010790497,
+      "sourceHandles": [
+        "C3A3D"
+      ],
+      "groundY": 7.498105606941604,
+      "campusY": 20.722332000732422,
+      "y": 21.072332000732423,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A3E",
+      "name": "MU Bio-Plant",
+      "lines": [
+        "MU Bio-Plant"
+      ],
+      "kind": "building",
+      "easting": 643227.9482462007,
+      "northing": 1525850.950101279,
+      "x": 352.653446200653,
+      "z": -556.8320012788754,
+      "sourceHandles": [
+        "C3A3E"
+      ],
+      "groundY": 7.423582968620393,
+      "campusY": 24.67104722146536,
+      "y": 25.021047221465363,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A3F",
+      "name": "MaSHARES @MB",
+      "lines": [
+        "MaSHARES @MB"
+      ],
+      "kind": "building",
+      "easting": 643197.5054616022,
+      "northing": 1525735.145586312,
+      "x": 322.2106616022065,
+      "z": -441.0274863119703,
+      "sourceHandles": [
+        "C3A3F"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 21.393237415373182,
+      "y": 21.743237415373184,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A41",
+      "name": "สถาบันวิจัยประชากรฯ",
+      "lines": [
+        "สถาบันวิจัยประชากรฯ"
+      ],
+      "kind": "building",
+      "easting": 643183.9037505888,
+      "northing": 1525698.15044917,
+      "x": 308.60895058873575,
+      "z": -404.0323491699528,
+      "sourceHandles": [
+        "C3A41"
+      ],
+      "groundY": 7.001096134899991,
+      "campusY": 27.456839964384308,
+      "y": 27.80683996438431,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A43",
+      "name": "ศูนย์ฝึกปฏิบัติเพื่อความเป็นเลิศฯ (โรงงานยา)",
+      "lines": [
+        "ศูนย์ฝึกปฏิบัติเพื่อความเป็นเลิศฯ",
+        "(โรงงานยา)"
+      ],
+      "kind": "building",
+      "easting": 643364.3328289369,
+      "northing": 1525834.365957969,
+      "x": 489.03802893683314,
+      "z": -540.2478579690214,
+      "sourceHandles": [
+        "C3A43"
+      ],
+      "groundY": 6.618749741625091,
+      "campusY": 17.352331161499023,
+      "y": 17.702331161499025,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A44",
+      "name": "อาคารเก็บเอกสาร",
+      "lines": [
+        "อาคารเก็บเอกสาร"
+      ],
+      "kind": "building",
+      "easting": 643345.1684974191,
+      "northing": 1525799.448966168,
+      "x": 469.8736974190688,
+      "z": -505.3308661680203,
+      "sourceHandles": [
+        "C3A44"
+      ],
+      "groundY": 6.655324584693497,
+      "campusY": 13.570844486012632,
+      "y": 13.920844486012632,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A47",
+      "name": "อาคาร IDHM",
+      "lines": [
+        "อาคาร IDHM"
+      ],
+      "kind": "building",
+      "easting": 642781.4463791162,
+      "northing": 1525783.221059741,
+      "x": -93.84842088387813,
+      "z": -489.10295974090695,
+      "sourceHandles": [
+        "C3A47"
+      ],
+      "groundY": 7.3871762216845,
+      "campusY": 48.232330322265625,
+      "y": 48.582330322265626,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A48",
+      "name": "MICC",
+      "lines": [
+        "MICC"
+      ],
+      "kind": "building",
+      "easting": 643382.2201178138,
+      "northing": 1526069.542055629,
+      "x": 506.92531781375874,
+      "z": -775.4239556288812,
+      "sourceHandles": [
+        "C3A48"
+      ],
+      "groundY": 8.264960847109087,
+      "campusY": null,
+      "y": 8.614960847109087,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A4A",
+      "name": "อาคารสิริวัฒนภักดี (สมาคมศิษย์เก่าฯ)",
+      "lines": [
+        "อาคารสิริวัฒนภักดี",
+        "(สมาคมศิษย์เก่าฯ)"
+      ],
+      "kind": "building",
+      "easting": 642761.6601810221,
+      "northing": 1526093.388757929,
+      "x": -113.63461897789966,
+      "z": -799.2706579288933,
+      "sourceHandles": [
+        "C3A4A"
+      ],
+      "groundY": 8.110708681421793,
+      "campusY": 14.532331466674805,
+      "y": 14.882331466674804,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A4B",
+      "name": "ประตู 1",
+      "lines": [
+        "ประตู 1"
+      ],
+      "kind": "place",
+      "easting": 642968.82494025,
+      "northing": 1524659.036799955,
+      "x": 93.53014024998993,
+      "z": 635.0813000451308,
+      "sourceHandles": [
+        "C3A4B"
+      ],
+      "groundY": 8.001096134899992,
+      "campusY": null,
+      "y": 8.351096134899992,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A4C",
+      "name": "ประตู 2",
+      "lines": [
+        "ประตู 2"
+      ],
+      "kind": "place",
+      "easting": 643474.3772754121,
+      "northing": 1525126.361794076,
+      "x": 599.0824754120549,
+      "z": 167.7563059241511,
+      "sourceHandles": [
+        "C3A4C"
+      ],
+      "groundY": 7.554479766846131,
+      "campusY": null,
+      "y": 7.904479766846131,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A4D",
+      "name": "ประตู 3",
+      "lines": [
+        "ประตู 3"
+      ],
+      "kind": "place",
+      "easting": 643461.6732822203,
+      "northing": 1525386.737116935,
+      "x": 586.3784822202288,
+      "z": -92.61901693488471,
+      "sourceHandles": [
+        "C3A4D"
+      ],
+      "groundY": 7.6299394203039,
+      "campusY": null,
+      "y": 7.9799394203039,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A4E",
+      "name": "ประตู 4",
+      "lines": [
+        "ประตู 4"
+      ],
+      "kind": "place",
+      "easting": 643453.9315775868,
+      "northing": 1525650.391596907,
+      "x": 578.6367775867693,
+      "z": -356.27349690697156,
+      "sourceHandles": [
+        "C3A4E"
+      ],
+      "groundY": 8.116051852908845,
+      "campusY": null,
+      "y": 8.466051852908844,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A4F",
+      "name": "ประตู 8",
+      "lines": [
+        "ประตู 8"
+      ],
+      "kind": "place",
+      "easting": 643188.2916329205,
+      "northing": 1526113.710810556,
+      "x": 312.9968329204712,
+      "z": -819.5927105559967,
+      "sourceHandles": [
+        "C3A4F"
+      ],
+      "groundY": 8.001096134899992,
+      "campusY": null,
+      "y": 8.351096134899992,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A50",
+      "name": "ประตู 5",
+      "lines": [
+        "ประตู 5"
+      ],
+      "kind": "place",
+      "easting": 642697.7341937833,
+      "northing": 1526134.221454919,
+      "x": -177.56060621677898,
+      "z": -840.1033549190033,
+      "sourceHandles": [
+        "C3A50"
+      ],
+      "groundY": 8.431622623818297,
+      "campusY": null,
+      "y": 8.781622623818297,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A51",
+      "name": "ประตู 6",
+      "lines": [
+        "ประตู 6"
+      ],
+      "kind": "place",
+      "easting": 642485.0666939942,
+      "northing": 1526143.188616532,
+      "x": -390.2281060058158,
+      "z": -849.0705165318213,
+      "sourceHandles": [
+        "C3A51"
+      ],
+      "groundY": 8.001096134899992,
+      "campusY": null,
+      "y": 8.351096134899992,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A52",
+      "name": "ประตูชนนีประทาน",
+      "lines": [
+        "ประตูชนนีประทาน"
+      ],
+      "kind": "place",
+      "easting": 642760.4394535098,
+      "northing": 1524637.29385413,
+      "x": -114.85534649027977,
+      "z": 656.8242458701134,
+      "sourceHandles": [
+        "C3A52"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": null,
+      "y": 7.851096134899991,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    },
+    {
+      "id": "C3A53",
+      "name": "เรือนไทย",
+      "lines": [
+        "เรือนไทย"
+      ],
+      "kind": "building",
+      "easting": 643156.4336355409,
+      "northing": 1524961.032327448,
+      "x": 281.13883554085623,
+      "z": 333.0857725520618,
+      "sourceHandles": [
+        "C3A53"
+      ],
+      "groundY": 6.77065757248835,
+      "campusY": 19.00233268737793,
+      "y": 19.35233268737793,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": true
+    },
+    {
+      "id": "C3A54",
+      "name": "อาคารบำบัดน้ำเสีย",
+      "lines": [
+        "อาคารบำบัดน้ำเสีย"
+      ],
+      "kind": "building",
+      "easting": 642352.7756855158,
+      "northing": 1525604.545906385,
+      "x": -522.5191144841956,
+      "z": -310.42780638486147,
+      "sourceHandles": [
+        "C3A54"
+      ],
+      "groundY": 7.501096134899991,
+      "campusY": null,
+      "y": 7.851096134899991,
+      "anchorMethod": "CAD XY; model surface height",
+      "roofHit": false
+    }
+  ]
+}
