@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { createSurveyLayer } from './survey-layer.js?v=20261102-1';
 import { OrbitControls } from './vendor/OrbitControls.js';
 import { GLTFLoader } from './vendor/GLTFLoader.js';
 import { createBenchmarkLayer } from './benchmark-layer.js?v=20261026-bm-v2';
@@ -14,7 +15,7 @@ const MODEL_VERSION = '20261021-03-3f4b03e5';
 let campus, basemap, buildingOutlines, waterEdges, needsRender = true;
 let floodMesh, floodMaterial, floodTriangles, floodPlanArea = 0, floodEnabled = false, floodVisited = false;
 let waterCm = MIN_WATER_CM, activePanel = 'explore';
-let benchmarkLayer;
+let benchmarkLayer, surveyLayer;
 const floodAreaCache = new Map();
 function invalidate() { needsRender = true; }
 for (const event of ['click', 'input', 'change']) document.addEventListener(event, invalidate);
@@ -335,7 +336,6 @@ for (const [id, getLayer] of [['campus-toggle', () => campus], ['basemap-toggle'
   $(id).onchange = event => { const layer = getLayer(); if (layer) layer.visible = event.target.checked; };
 }
 $('terrain-toggle').onchange = event => { if (terrain) { terrain.visible = event.target.checked; updatePin(); } };
-$('contour-toggle').onchange = event => { if (contours) contours.visible = event.target.checked; };
 $('qa-toggle').onchange = event => { if (qa) qa.visible = event.target.checked; $('qa-note').hidden = !event.target.checked; };
 
 async function snapshot() {
@@ -345,6 +345,7 @@ async function snapshot() {
     const source = renderer.domElement; const output = document.createElement('canvas');
     output.width = source.width; output.height = source.height + 145;
     const ctx = output.getContext('2d'); ctx.fillStyle = '#fafbf6'; ctx.fillRect(0, 0, output.width, output.height); ctx.drawImage(source, 0, 0);
+    surveyLayer?.draw(ctx, source.width / host.clientWidth);
     benchmarkLayer?.draw(ctx, source.width / host.clientWidth);
     ctx.fillStyle = '#183e34'; ctx.font = '19px Arial'; ctx.fillText(`MAHIDOL SALAYA · TERRAIN EXPLORER | ${mode === 'top' ? 'Top view' : '3D view'} | Vertical display x${exag}`, 24, source.height + 31);
     ctx.font = '12px Arial'; ctx.fillStyle = '#6a7e5b';
@@ -433,7 +434,7 @@ async function initialize() {
     function animate() {
       raf = requestAnimationFrame(animate); controls.update();
       if (!needsRender) return;
-      needsRender = false; updatePin(); benchmarkLayer?.update();
+      needsRender = false; updatePin(); benchmarkLayer?.update(); surveyLayer?.update();
       const north = controls.target.clone().add(new THREE.Vector3(0, 0, -200)).project(camera);
       const origin = controls.target.clone().project(camera);
       const angle = Math.atan2((north.x - origin.x) * host.clientWidth, (north.y - origin.y) * host.clientHeight) * 180 / Math.PI;
@@ -442,6 +443,7 @@ async function initialize() {
     }
     animate();
     loadContext(loader);
+    createSurveyLayer({model,camera,host,metadata:meta,invalidate}).then(layer=>{surveyLayer=layer;contours=layer.group;invalidate();}).catch(error=>{ $('survey-status').textContent='โหลดชั้นข้อมูลสำรวจไม่สำเร็จ กรุณาโหลดหน้าใหม่'; console.error(error); });
     // Read-only QA hook: coordinates and original model data, no user content or state mutation.
     window.terrainInspection = () => ({ faces: faceCount, bands: terrainMeshes.length, exag, view: mode, selectedBand, selectedPoint: selectedPoint ? { elevation: selectedPoint.elevation, easting: selectedPoint.easting, northing: selectedPoint.northing, band: selectedPoint.band } : null, layers: { terrain: terrain.visible, contours: contours.visible, qa: qa.visible, campus: campus.visible, basemap: basemap.visible }, sourceSha256: meta.sourceSha256, contextReady: host.dataset.contextReady, contextFiles: meta.contextFiles?.length, displayOffset: meta.terrainDisplayOffsetMetres, renderer: renderer.info.render });
   } catch (error) {
